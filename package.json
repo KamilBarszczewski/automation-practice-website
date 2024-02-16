@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "open": "npx cypress open",
-    "tc1:register": "npx cypress run --spec 'cypress/e2e/tc01-registerUser.cy.js' --browser chrome --headed"
+    "tc1:register": "npx cypress run --spec 'cypress/e2e/tc01-registerUser.cy.js' --browser chrome --headed",
+    "tc2:login:correct": "npx cypress run --spec 'cypress/e2e/tc02-loginCorrect.cy.js' --browser chrome --headed",
+    "tc3:login:incorrect": "npx cypress run --spec 'cypress/e2e/tc03-loginIncorrect.cy.js' --browser chrome --headed",
+    "tc4:logout": "npx cypress run --spec 'cypress/e2e/tc04-logoutUser.cy.js' --browser chrome --headed"
   },
   "keywords": [],
   "author": "Kamil Barszczewski",
