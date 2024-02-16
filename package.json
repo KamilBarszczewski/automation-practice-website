@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "open": "npx cypress open",
-    "tc1:register": "npx cypress run --spec 'cypress/e2e/tc01-registerUser.cy.js' --browser chrome --headed",
-    "tc2:login:correct": "npx cypress run --spec 'cypress/e2e/tc02-loginCorrect.cy.js' --browser chrome --headed",
-    "tc3:login:incorrect": "npx cypress run --spec 'cypress/e2e/tc03-loginIncorrect.cy.js' --browser chrome --headed",
-    "tc4:logout": "npx cypress run --spec 'cypress/e2e/tc04-logoutUser.cy.js' --browser chrome --headed"
+    "tc1:register": "npx cypress run --spec 'cypress/e2e/tc01-registerUser.cy.js' --browser chrome",
+    "tc2:login:correct": "npx cypress run --spec 'cypress/e2e/tc02-loginCorrect.cy.js' --browser chrome",
+    "tc3:login:incorrect": "npx cypress run --spec 'cypress/e2e/tc03-loginIncorrect.cy.js' --browser chrome",
+    "tc4:logout": "npx cypress run --spec 'cypress/e2e/tc04-logoutUser.cy.js' --browser chrome",
+    "tc5:register:existing:email": "npx cypress run --spec 'cypress/e2e/tc05-registerExistingEmail.cy.js' --browser chrome",
+    "tc6:contact:us:form": "npx cypress run --spec 'cypress/e2e/tc06-contactUsForm.cy.js' --browser chrome",
+    "tc7:test:cases:page": "npx cypress run --spec 'cypress/e2e/tc07-verifyTestCasesPage.cy.js' --browser chrome"
   },
   "keywords": [],
   "author": "Kamil Barszczewski",
