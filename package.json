@@ -1,0 +1,17 @@
+{
+  "name": "tc01",
+  "version": "1.0.0",
+  "description": "Test Case 1: Register User",
+  "main": "index.js",
+  "scripts": {
+    "open": "npx cypress open",
+    "tc1:register": "npx cypress run --spec 'cypress/e2e/tc01-registerUser.cy.js' --browser chrome --headed"
+  },
+  "keywords": [],
+  "author": "Kamil Barszczewski",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.6.4",
+    "cypress-dark": "^1.8.3"
+  }
+}
