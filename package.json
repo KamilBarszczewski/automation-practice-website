@@ -18,7 +18,8 @@
     "tc11": "npx cypress run --spec 'cypress/e2e/tc11-verifySubsCart.cy.js' --browser chrome",
     "tc12": "npx cypress run --spec 'cypress/e2e/tc12-addProductsCart.cy.js' --browser chrome",
     "tc13": "npx cypress run --spec 'cypress/e2e/tc13-productQtCart.cy.js' --browser chrome",
-    "tc14": "npx cypress run --spec cypress/e2e/tc14-registerWhileCheckout.cy.js --browser chrome"
+    "tc14": "npx cypress run --spec cypress/e2e/tc14-registerWhileCheckout.cy.js --browser chrome",
+    "tc15": "npx cypress run --spec cypress/e2e/tc15-registerBeforeCheckout.cy.js --browser chrome"
   },
   "keywords": [],
   "author": "Kamil Barszczewski",
