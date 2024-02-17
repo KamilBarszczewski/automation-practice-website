@@ -8,14 +8,14 @@ describe("Test Case 1: Register User", () => {
     cy.get('a[href="/login"]').contains(" Signup / Login").click();
     cy.url().should("include", "/login");
     cy.contains("h2", "New User Signup!").should("be.visible");
-    cy.get('input[data-qa="signup-name"]').type("Tescik");
-    cy.get('input[data-qa="signup-email"]').type("tescik@test.ts");
+    cy.get('input[data-qa="signup-name"]').clear().type("Tescik");
+    cy.get('input[data-qa="signup-email"]').clear().type("tescik@test.ts");
     cy.get('button[data-qa="signup-button"]').click();
 
     cy.contains("b", "Enter Account Information").should("be.visible");
     // ENTER ACCOUNT INFORMATION
     cy.get('#id_gender1').check()
-    cy.get('[data-qa="password"]').type('testowy@', {delay:300})
+    cy.get('[data-qa="password"]').clear().type('testowy@', {delay:300})
     cy.get('#days').select('30');
     cy.get('#months').select('10');
     cy.get('#years').select('1955');
@@ -23,16 +23,16 @@ describe("Test Case 1: Register User", () => {
     cy.get('#optin').check()
 
     // INSERT ADDRESS INFORMATION
-    cy.get('#first_name').type("Testeusz");
-    cy.get('#last_name').type("Testeuszewicz");
-    cy.get('#company').type("Test-Soft");
-    cy.get('#address1').type("Testowa 11");
-    cy.get('#address2').type("Testowa 12");
+    cy.get('#first_name').clear().type("Testeusz");
+    cy.get('#last_name').clear().type("Testeuszewicz");
+    cy.get('#company').clear().type("Test-Soft");
+    cy.get('#address1').clear().type("Testowa 11");
+    cy.get('#address2').clear().type("Testowa 12");
     cy.get('#country').select('United States');
-    cy.get('#state').type('Nevada');
-    cy.get('#city').type("Testowo Testowe");
-    cy.get('#zipcode').type('555333111'),
-    cy.get('#mobile_number').type('0084555666777'),
+    cy.get('#state').clear().type('Nevada');
+    cy.get('#city').clear().type("Testowo Testowe");
+    cy.get('#zipcode').clear().type('555333111'),
+    cy.get('#mobile_number').clear().type('0084555666777'),
     cy.get('button[data-qa="create-account"]').click()
 
     cy.get('[data-qa="account-created"]').should('be.visible');
