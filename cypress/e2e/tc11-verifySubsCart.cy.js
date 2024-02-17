@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe("Test Case 11: Verify Subscription in Cart page", () => {
     it("Veryfying Subscription", () => {
         cy.visit("/");
