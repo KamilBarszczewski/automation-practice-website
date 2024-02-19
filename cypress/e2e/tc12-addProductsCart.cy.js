@@ -1,11 +1,19 @@
 /// <reference types="cypress" />
 
+import MenuComponent from "./../component/menuComponent";
+import PageComponent from "../component/pageComponent";
+
+const menu = new MenuComponent();
+const page = new PageComponent();
+
 describe("Test Case 12: Add Products in Cart", () => {
     it("Adding products in Cart PAge", () => {
         cy.visit("/");
-        cy.get('img[src="/static/images/home/logo.png"]').should("be.visible");
-        cy.get('a[href="/products"]').contains(" Products").click();
+        menu.products();
+        
+        cy.get('.single-products').contains('Blue Top').trigger('mouseover')
         cy.get('a[data-product-id="1"]').contains('Add to cart').invoke('show').click();
+        
         cy.get('button[data-dismiss="modal"]').contains('Continue Shopping').click()
 
         cy.get('a[data-product-id="2"]').contains('Add to cart').invoke('show').click();

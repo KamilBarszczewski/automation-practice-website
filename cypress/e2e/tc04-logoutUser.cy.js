@@ -1,21 +1,43 @@
 /// <reference types="cypress" />
 
+import SignupLogin from "./../pages/signupLogin.cy";
+import Signup from "../pages/signup.cy";
+import MenuComponent from "./../component/menuComponent";
+
+const signupLogin = new SignupLogin();
+const signup = new Signup();
+const menu = new MenuComponent();
+
 describe('Test Case 2: Login User with correct email and password', () => {
+
+    before("Registering user on page", () => {
+        cy.visit("/");
+        menu.signupLogin();
+        // REGISTERING USER
+        signupLogin.signupUser("Tescik", "tescik@test.ts");
+        // ENTER ACCOUNT INFORMATION
+        signup.enterAccInfo("testowy@", "30", "10", "1955");
+        signup.addressInfo(
+          "Testeusz",
+          "Testeuszewicz",
+          "Test-Soft",
+          "Testowa 11",
+          "Testowa 21",
+          "United States",
+          "Nevada",
+          "Testowo Testowe",
+          "555333111",
+          "0021455535299"
+        );
+    
+        menu.logoutAccount();
+      });
 
     it('Log in & log out user with correct login and passworrd', () => {
         cy.visit("/");
-        cy.get('img[src="/static/images/home/logo.png"]').should("be.visible");
-        cy.get('a[href="/login"]').contains(" Signup / Login").click();
-        cy.url().should("include", "/login");
-        cy.contains("h2", "Login to your account").should("be.visible");
-        cy.get('input[data-qa="login-email"]').clear()
-        cy.get('input[data-qa="login-email"]').type('tescik@test.ts');
-        cy.get('input[data-qa="login-password"]').clear()
-        cy.get('input[data-qa="login-password"]').type('testowy@');
-        cy.get('button[data-qa="login-button"]').click();
-        cy.contains('a', ' Logged in as ').should('be.visible');
-
+        menu.signupLogin();
+        signupLogin.loginUser('tescik@test.ts', 'testowy@')
         // LOG OUT USER
-        cy.get('.fa-lock').click()
+        menu.logoutAccount();
     })
 })
