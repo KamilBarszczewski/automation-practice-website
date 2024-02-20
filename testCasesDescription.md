@@ -207,3 +207,47 @@
 15. Verify success message 'Your order has been placed successfully!'
 16. Click 'Delete Account' button
 17. Verify 'ACCOUNT DELETED!' and click 'Continue' button
+
+## Test Case 17: Remove Products From Cart
+1. Launch browser
+2. Navigate to url 'http://automationexercise.com'
+3. Verify that home page is visible successfully
+4. Add products to cart
+5. Click 'Cart' button
+6. Verify that cart page is displayed
+7. Click 'X' button corresponding to particular product
+8. Verify that product is removed from the cart
+
+## Test Case 18: View Category Products
+1. Launch browser
+2. Navigate to url 'http://automationexercise.com'
+3. Verify that categories are visible on left side bar
+4. Click on 'Women' category
+5. Click on any category link under 'Women' category, for example: Dress
+6. Verify that category page is displayed and confirm text 'WOMEN - TOPS PRODUCTS'
+7. On left side bar, click on any sub-category link of 'Men' category
+8. Verify that user is navigated to that category page
+
+## Test Case 19: View & Cart Brand Products
+1. Launch browser
+2. Navigate to url 'http://automationexercise.com'
+3. Click on 'Products' button
+4. Verify that Brands are visible on left side bar
+5. Click on any brand name
+6. Verify that user is navigated to brand page and brand products are displayed
+7. On left side bar, click on any other brand link
+8. Verify that user is navigated to that brand page and can see products
+
+## Test Case 20: Search Products and Verify Cart After Login
+1. Launch browser
+2. Navigate to url 'http://automationexercise.com'
+3. Click on 'Products' button
+4. Verify user is navigated to ALL PRODUCTS page successfully
+5. Enter product name in search input and click search button
+6. Verify 'SEARCHED PRODUCTS' is visible
+7. Verify all the products related to search are visible
+8. Add those products to cart
+9. Click 'Cart' button and verify that products are visible in cart
+10. Click 'Signup / Login' button and submit login details
+11. Again, go to Cart page
+12. Verify that those products are visible in cart after login as well
