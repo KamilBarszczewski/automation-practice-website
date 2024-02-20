@@ -1,12 +1,8 @@
 /// <reference types="cypress" />
 
-import SignupLogin from "./../pages/signupLogin.cy";
-import Signup from "../pages/signup.cy";
 import MenuComponent from "./../component/menuComponent";
 import ContactUs from "../pages/contactUs.cy";
 
-const signupLogin = new SignupLogin();
-const signup = new Signup();
 const menu = new MenuComponent();
 const contactUs = new ContactUs();
 

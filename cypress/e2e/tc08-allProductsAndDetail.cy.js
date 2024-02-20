@@ -10,6 +10,6 @@ describe("Test Case 8: Verify All Products and product detail page", () => {
     it("Veryfying products page", () => {
         cy.visit("/");
         menu.products();
-        products.displayProduct();
+        products.displayFirstProduct();
     });
 });

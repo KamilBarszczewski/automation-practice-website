@@ -16,6 +16,7 @@ class Cart {
     }
 
     checkout() {
+        cy.get('.active').contains('Shopping Cart').should('be.visible')
         this.btnCheckout.click()
     }
 }
