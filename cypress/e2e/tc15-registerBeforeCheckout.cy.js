@@ -7,6 +7,7 @@ import Cart from "../pages/cart.cy";
 import PageComponent from "../component/pageComponent";
 import Payment from "../pages/payment.cy";
 import Checkout from "../pages/checkout.cy";
+import Products from "../pages/products.cy";
 
 const menu = new MenuComponent();
 const signupLogin = new SignupLogin();
@@ -15,6 +16,7 @@ const cart = new Cart();
 const page = new PageComponent();
 const payment = new Payment();
 const checkout = new Checkout();
+const products = new Products();
 
 describe("Test Case 15: Place Order: Register before Checkout", () => {
   it("registering user then checkout", () => {
@@ -37,15 +39,10 @@ describe("Test Case 15: Place Order: Register before Checkout", () => {
        "0021455535299"
      );
  
-    //cy.visit("/")
     menu.products();
-    cy.get('.single-products').contains('Blue Top').trigger('mouseover');
-    cy.get('a[data-product-id="1"]').contains('Add to cart').invoke('show').click();
-
+    products.getFirstProduct();
     page.continueShopping();
-
-    cy.get('a[data-product-id="3"]').contains("Add to cart").invoke("show").click();
-
+    products.getSecondProduct();
     page.viewCart();
     cart.checkout();
     checkout.placeOrder('Test message');
