@@ -36,18 +36,19 @@ class MenuComponent {
   }
 
   products() {
-    cy.contains("h2", "Features Items").should("be.visible");
     this.btnProducts.click();
+    cy.contains("h2", "All Products").should("be.visible");
   }
 
   cart() {
-    cy.contains("h2", "Features Items").should("be.visible");
     this.btnCart.click({force: true});
+    cy.contains("li", "Shopping Cart").should("be.visible");
   }
 
   signupLogin() {
-    cy.contains("h2", "Features Items").should("be.visible");
     this.btnSignupLogin.click();
+    cy.contains('h2', 'Login to your account').should('be.visible');
+    cy.contains('h2', 'New User Signup!').should('be.visible');
   }
 
   logoutAccount() {
@@ -61,13 +62,13 @@ class MenuComponent {
   }
 
   contactUs() {
-    cy.contains("h2", "Features Items").should("be.visible");
     this.btnContactUs.click();
+    cy.contains('h2', 'Get In Touch').should('be.visible');
   } 
   
-  testCases() {
-    cy.contains("h2", "Features Items").should("be.visible");
-    this.btnTestCases.click()
+  testCases() {;
+    this.btnTestCases.click();
+    cy.contains("h2", "Test Cases").should("be.visible");
   }
 }
 
