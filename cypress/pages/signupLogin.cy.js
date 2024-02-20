@@ -1,6 +1,10 @@
 /// <reference types="cypress" />
 
+import Signup from "./signup.cy";
+
 class SignupLogin {
+
+    signup = new Signup();
 
     get signupName() {
         return cy.get('input[data-qa="signup-name"]');
