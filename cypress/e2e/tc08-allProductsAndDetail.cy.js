@@ -1,15 +1,15 @@
 /// <reference types="cypress" />
 
 import MenuComponent from "./../component/menuComponent";
-import Products from "../pages/products.cy";
+import PageComponent from "../component/pageComponent";
 
 const menu = new MenuComponent();
-const products = new Products();
+const page = new PageComponent();
 
 describe("Test Case 8: Verify All Products and product detail page", () => {
     it("Veryfying products page", () => {
         cy.visit("/");
         menu.products();
-        products.displayFirstProduct();
+        page.products.displayFirstProduct();
     });
 });

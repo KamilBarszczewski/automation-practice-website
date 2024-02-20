@@ -2,21 +2,11 @@
 
 import MenuComponent from "../component/menuComponent";
 import SignupLogin from "../pages/signupLogin.cy";
-import Signup from "../pages/signup.cy";
-import Cart from "../pages/cart.cy";
 import PageComponent from "../component/pageComponent";
-import Payment from "../pages/payment.cy";
-import Checkout from "../pages/checkout.cy";
-import Products from "../pages/products.cy";
 
 const menu = new MenuComponent();
 const signupLogin = new SignupLogin();
-const signup = new Signup();
-const cart = new Cart();
 const page = new PageComponent();
-const payment = new Payment();
-const checkout = new Checkout();
-const products = new Products();
 
 describe("Test Case 15: Place Order: Register before Checkout", () => {
   it("registering user then checkout", () => {
@@ -25,8 +15,8 @@ describe("Test Case 15: Place Order: Register before Checkout", () => {
      // REGISTERING USER
      signupLogin.signupUser("Tescik", "tescik@test.ts");
      // ENTER ACCOUNT INFORMATION
-     signup.enterAccInfo("testowy@", "30", "10", "1955");
-     signup.addressInfo(
+     signupLogin.signup.enterAccInfo("testowy@", "30", "10", "1955");
+     signupLogin.signup.addressInfo(
        "Testeusz",
        "Testeuszewicz",
        "Test-Soft",
@@ -40,13 +30,13 @@ describe("Test Case 15: Place Order: Register before Checkout", () => {
      );
  
     menu.products();
-    products.getFirstProduct();
+    page.products.getFirstProduct();
     page.continueShopping();
-    products.getSecondProduct();
+    page.products.getSecondProduct();
     page.viewCart();
-    cart.checkout();
-    checkout.placeOrder('Test message');
-    payment.confirmPayment(
+    page.cart.checkout();
+    page.checkout.placeOrder('Test message');
+    page.payment.confirmPayment(
       'Testeusz Testeuszewicz', '123456789', '123', '123', '2025'
     );
 

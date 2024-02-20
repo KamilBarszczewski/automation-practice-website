@@ -1,16 +1,16 @@
 /// <reference types="cypress" />
 
 import MenuComponent from "./../component/menuComponent";
-import ContactUs from "../pages/contactUs.cy";
+import PageComponent from "../component/pageComponent";
 
 const menu = new MenuComponent();
-const contactUs = new ContactUs();
+const page = new PageComponent();
 
 describe("Test Case 6: Contact Us form", () => {
     it("Filling up form", () => {
       cy.visit("/");
       menu.contactUs();
-      contactUs.contactUsForm(
+      page.contactUs.contactUsForm(
         'Testeusz Testowy',
         'tescik@test.ts',
         'Temat testowy',
@@ -18,6 +18,6 @@ describe("Test Case 6: Contact Us form", () => {
         'cypress/fixtures/faun.webp',
       );
 
-      contactUs.homeButton();
+      page.contactUs.homeButton();
     });
 });

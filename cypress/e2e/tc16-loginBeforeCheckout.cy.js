@@ -1,22 +1,12 @@
 /// <reference types="cypress" />
 
+import PageComponent from "../component/pageComponent";
 import MenuComponent from "../component/menuComponent";
-import PageComponent from "../component/pageComponent"
 import SignupLogin from "../pages/signupLogin.cy";
-import Signup from "../pages/signup.cy";
-import Products from "../pages/products.cy";
-import Payment from "../pages/payment.cy";
-import Checkout from "../pages/checkout.cy";
-import Cart from "../pages/cart.cy"
 
+const page = new PageComponent()
 const menu = new MenuComponent();
 const signupLogin = new SignupLogin();
-const signup = new Signup();
-const products = new Products();
-const payment = new Payment();
-const checkout = new Checkout();
-const page = new PageComponent();
-const cart = new Cart();
 
 describe("Test Case 16: Place Order: Login before Checkout", () => {
     before('Registering user', () => {
@@ -25,8 +15,8 @@ describe("Test Case 16: Place Order: Login before Checkout", () => {
         // REGISTERING USER
         signupLogin.signupUser("Tescik", "tescik@test.ts");
         // ENTER ACCOUNT INFORMATION
-        signup.enterAccInfo("testowy@", "30", "10", "1955");
-        signup.addressInfo(
+        signupLogin.signup.enterAccInfo("testowy@", "30", "10", "1955");
+        signupLogin.signup.addressInfo(
         "Testeusz",
         "Testeuszewicz",
         "Test-Soft",
@@ -47,13 +37,13 @@ describe("Test Case 16: Place Order: Login before Checkout", () => {
         signupLogin.loginUser('tescik@test.ts', 'testowy@')
 
         menu.products();
-        products.getFirstProduct();
+        page.products.getFirstProduct();
         page.continueShopping();
-        products.getSecondProduct();
+        page.products.getSecondProduct();
         page.viewCart();
-        cart.checkout();
-        checkout.placeOrder('Test message');
-        payment.confirmPayment(
+        page.cart.checkout();
+        page.checkout.placeOrder('Test message');
+        page.payment.confirmPayment(
         'Testeusz Testeuszewicz', '123456789', '123', '123', '2025'
         );
 
