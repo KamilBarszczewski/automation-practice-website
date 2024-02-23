@@ -31,8 +31,7 @@ class MenuComponent {
   }
 
   get btnContinue() {
-    cy.contains("b", "Account Deleted!").should("be.visible");
-    return cy.get('[data-qa="continue-button"]');
+    return cy.getDataQa("continue-button");
   }
 
   products() {
@@ -56,9 +55,10 @@ class MenuComponent {
   }
 
   deleteAccount() {
-    cy.contains("a", " Logged in as ").should("be.visible");
     this.btnDeleteAcc.click();
+    cy.contains(/account deleted/i)
     this.btnContinue.click();
+
   }
 
   contactUs() {

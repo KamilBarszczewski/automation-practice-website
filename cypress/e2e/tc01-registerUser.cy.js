@@ -7,14 +7,21 @@ const signupLogin = new SignupLogin();
 const menu = new MenuComponent();
 
 describe("Test Case 1: Register User", () => {
-  it("Registering and deleting User on Page", () => {
+  beforeEach(() => {
     cy.visit("/");
+  });
+
+  it("register and delete User", () => {
     menu.signupLogin();
     // REGISTERING USER
     signupLogin.signupUser("Tescik", "tescik@test.ts");
     // ENTER ACCOUNT INFORMATION
-    signupLogin.signup.enterAccInfo("testowy@", "30", "10", "1955");
-    signupLogin.signup.addressInfo(
+    signupLogin.signup.createAcc(
+      "Tescik",
+      "testowy@",
+      "30",
+      "10",
+      "1955",
       "Testeusz",
       "Testeuszewicz",
       "Test-Soft",

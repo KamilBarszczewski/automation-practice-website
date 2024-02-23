@@ -251,3 +251,26 @@
 10. Click 'Signup / Login' button and submit login details
 11. Again, go to Cart page
 12. Verify that those products are visible in cart after login as well
+
+## Test Case 21: Add review on product
+1. Launch browser
+2. Navigate to url 'http://automationexercise.com'
+3. Click on 'Products' button
+4. Verify user is navigated to ALL PRODUCTS page successfully
+5. Click on 'View Product' button
+6. Verify 'Write Your Review' is visible
+7. Enter name, email and review
+8. Click 'Submit' button
+9. Verify success message 'Thank you for your review.'
+
+## Test Case 22: Add to cart from Recommended items
+1. Launch browser
+2. Navigate to url 'http://automationexercise.com'
+3. Scroll to bottom of page
+4. Verify 'RECOMMENDED ITEMS' are visible
+5. Click on 'Add To Cart' on Recommended product
+6. Click on 'View Cart' button
+7. Verify that product is displayed in cart page
+
+
+

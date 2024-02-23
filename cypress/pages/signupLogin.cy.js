@@ -7,27 +7,27 @@ class SignupLogin {
     signup = new Signup();
 
     get signupName() {
-        return cy.get('input[data-qa="signup-name"]');
+        return cy.getDataQa("signup-name")
     }
 
     get signupEmail() {
-        return cy.get('input[data-qa="signup-email"]');
+        return cy.getDataQa("signup-email")
     }
 
     get btnSignup() {
-        return cy.get('button[data-qa="signup-button"]');
+        return cy.getDataQa("signup-button")
     }
 
     get loginEmail() {
-        return cy.get('input[data-qa="login-email"]');
+        return cy.getDataQa("login-email")
     }
 
     get loginPassword() {
-        return cy.get('input[data-qa="login-password"]')
+        cy.getDataQa("login-password")
     }
 
     get btnLogin() {
-        return cy.get('button[data-qa="login-button"]')
+        return cy.getDataQa("login-button")
     }
 
     signupUser(name, email) {

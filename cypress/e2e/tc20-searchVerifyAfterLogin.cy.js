@@ -33,19 +33,23 @@ describe("Test Case 20: Search Products and Verify Cart After Login", () => {
     });
 
   it("exploring Brand", () => {
-    cy.visit("/");
-    menu.products();
-    page.searchProduct('jeans');
-    page.products.getJeans1();
-    page.continueShopping();
-    page.products.getJeans2();
-    page.continueShopping();
-    page.products.getJeans3();
-    page.viewCart();
-    page.products.verifyAllJeans();
-    menu.signupLogin();
-    signupLogin.loginUser('tescik@test.ts', 'testowy@');
-    menu.cart();
-    page.products.verifyAllJeans();
+        cy.visit("/");
+        menu.products();
+        page.searchProduct('jeans');
+        page.products.getJeans1();
+        page.continueShopping();
+        page.products.getJeans2();
+        page.continueShopping();
+        page.products.getJeans3();
+        page.viewCart();
+        page.products.verifyAllJeans();
+        menu.signupLogin();
+        signupLogin.loginUser('tescik@test.ts', 'testowy@');
+        menu.cart();
+        page.products.verifyAllJeans();
   });
+
+    after('Deleting user', () => {
+        menu.deleteAccount();
+    });
 });

@@ -30,6 +30,35 @@ class Products {
         return cy.get('button > .fa-shopping-cart').contains('Add to cart');
     }
 
+    get detailProduct1() {
+        return cy.get('a[href="/product_details/1"]').contains('View Product')
+    }
+
+    get reviewName() {
+        return cy.get('#name');
+    }
+
+    get reviewEmail() {
+        return cy.get('#email');
+    }
+
+    get reviewMessage() {
+        return cy.get('#review');
+    }
+
+    get btnSubmit() {
+        return cy.get('#button-review');
+    }
+
+    writeReview(name, email, message) {
+        cy.contains('a', 'Write Your Review').should('be.visible');
+        this.reviewName.clear().type(name);
+        this.reviewEmail.clear().type(email);
+        this.reviewMessage.clear().type(message);
+        this.btnSubmit.click();
+        cy.contains('span', 'Thank you for your review.').should('be.visible');
+    }
+
     get1Product() {
         this.product.click()
     }
@@ -61,6 +90,11 @@ class Products {
         cy.contains('a', 'Soft Stretch Jeans').should('be.visible');
         cy.contains('a', 'Regular Fit Straight Jeans').should('be.visible');
         cy.contains('a', 'Grunt Blue Slim Fit Jeans').should('be.visible');
+    }
+
+    getDetailProduct1() {
+        cy.contains('p', 'Blue Top').should('be.visible');
+        this.detailProduct1.click();
     }
 
     addToCart() {

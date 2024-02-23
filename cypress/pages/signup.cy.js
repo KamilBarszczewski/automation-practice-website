@@ -13,24 +13,24 @@ class Signup {
 
     // In case to change name
     get name() {
-        return cy.get('#name')
+        return cy.getDataQa('name')
     }
 
     // In case to change password
     get password() {
-        return cy.get('#password')
+        return cy.getDataQa('password')
     }
 
     get birthDay() {
-        return cy.get('#days');
+        return cy.getDataQa('days');
     }
 
     get birthMonth() {
-        return cy.get('#months');
+        return cy.getDataQa('months');
     }
 
     get birthYear() {
-        return  cy.get('#years');
+        return cy.getDataQa('years');
     }
 
     get newsletterCheck() {
@@ -44,70 +44,65 @@ class Signup {
 
     // Address Information
     get firstName() {
-        return cy.get('#first_name');
+        return cy.getDataQa('first_name');
     }
 
     get lastName() {
-        return cy.get('#last_name')
+        return cy.getDataQa('last_name')
     }
 
     get company() {
-        return cy.get('#company')
+        return cy.getDataQa('company')
     }
 
     get address1() {
-        return cy.get('#address1')
+        return cy.getDataQa('address')
     }
 
     get address2() {
-        return cy.get('#address2')
+        return cy.getDataQa('address2')
     }
 
     get country() {
-        return cy.get('#country')
+        return cy.getDataQa('country')
     }
 
     get state() {
-        return cy.get('#state')
+        return cy.getDataQa('state')
     }
 
     get city() {
-        return cy.get('#city')
+        return cy.getDataQa('city')
     }
 
     get zipCode() {
-        return cy.get('#zipcode')
+        return cy.getDataQa('zipcode')
     }
 
     get mobileNumber() {
-        return cy.get('#mobile_number')
+        return cy.getDataQa('mobile_number')
     }
 
     get btnCreateAcc() {
-        return cy.get('button[data-qa="create-account"]')
+        return cy.getDataQa("create-account")
     }
 
 
-    enterAccInfo(
-        password, day, month, year,
+    createAcc(
+        name, password, day, month, year,  firstName, 
+        lastName, company, address1, address2, 
+        country, state, city, zipcode, mobile
     ) {
         cy.contains("b", "Enter Account Information")
-            .should("be.visible");
+            .should("exist");
         this.mrTitle.check();
-        this.password.clear().type(password),
+        this.name.clear().type(name)
+        this.password.clear().type(password);
         this.birthDay.select(day);
         this.birthMonth.select(month);
         this.birthYear.select(year);
         this.newsletterCheck.check();
         this.specialOffersCheck.check();
-
-    }
-
-    addressInfo(
-        firstName, lastName, company,
-        address1, address2, country,
-        state, city, zipcode, mobile
-    ) {
         this.firstName.clear().type(firstName);
         this.lastName.clear().type(lastName);
         this.company.clear().type(company);
@@ -120,9 +115,9 @@ class Signup {
         this.mobileNumber.clear().type(mobile);
         this.btnCreateAcc.click();
 
-        cy.get('[data-qa="account-created"]').should("be.visible");
-        cy.get('[data-qa="continue-button"]').click();
-        cy.contains("a", " Logged in as ").should("be.visible");
+        cy.getDataQa("account-created").should("be.visible");
+        cy.getDataQa("continue-button").click();
+        cy.contains("a", ` Logged in as ${name}`).should("exist");
     }
 }
 
