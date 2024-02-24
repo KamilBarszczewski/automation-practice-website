@@ -7,9 +7,15 @@ const menu = new MenuComponent();
 const page = new PageComponent();
 
 describe("Test Case 8: Verify All Products and product detail page", () => {
-    it("Veryfying products page", () => {
-        cy.visit("/");
-        menu.products();
-        page.products.displayFirstProduct();
-    });
+  it("veryfy products page", () => {
+    cy.visit("/");
+    cy.location("pathname").should("equal", "/");
+
+    menu.products();
+    //page.products.displayFirstProduct();
+    cy.getProduct(1);
+    cy.location("pathname").should("equal", "/product_details/1");
+
+    page.products.getProductDetails();
+  });
 });
