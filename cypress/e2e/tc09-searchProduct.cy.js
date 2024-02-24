@@ -7,9 +7,9 @@ const menu = new MenuComponent();
 const page = new PageComponent();
 
 describe("Test Case 9: Search Product", () => {
-    it("Veryfying Search on Products page", () => {
-        cy.visit("/");
-        menu.products();
-        page.searchProduct('dress')
-    });
+  it("Veryfy Search on Products page", () => {
+    cy.visit("/");
+    menu.products();
+    page.products.searchProduct("dress");
+  });
 });

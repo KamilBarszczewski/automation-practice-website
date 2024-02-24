@@ -7,9 +7,9 @@ const menu = new MenuComponent();
 const page = new PageComponent();
 
 describe("Test Case 11: Verify Subscription in Cart page", () => {
-    it("Veryfying Subscription", () => {
-        cy.visit("/");
-        menu.cart();
-        page.subscribe('tescik@test.ts')
-    });
+  it("Veryfying Subscription", () => {
+    cy.visit("/");
+    menu.cart();
+    page.cart.subscribe("tescik@test.ts");
+  });
 });

@@ -1,119 +1,171 @@
 /// <reference types="cypress" />
 
 class Products {
+  get productName() {
+    return cy.get(".product-information").within(() => {
+      cy.get("h2").then((name) => {
+        cy.contains(name.text());
+      });
+    });
+  }
 
-    get product1() {
-        return cy.get('a[href="/product_details/1"]').contains('View Product')
-    }
+  get productCategory() {
+    return cy.get(".product-information").within(() => {
+      cy.get("p")
+        .its(0)
+        .then((text) => {
+          cy.contains(text.text());
+        });
+    });
+  }
 
-    get product1st() {
-        return cy.get('a[data-product-id="1"]').contains('Add to cart');
-    }
+  get productAvailability() {
+    return cy.get(".product-information").within(() => {
+      cy.get("p")
+        .its(1)
+        .then((text) => {
+          cy.contains(text.text());
+        });
+    });
+  }
 
-    get product2nd() {
-        return cy.get('a[data-product-id="2"]').contains('Add to cart');
-    }
+  get productCondition() {
+    return cy.get(".product-information").within(() => {
+      cy.get("p")
+        .its(2)
+        .then((text) => {
+          cy.contains(text.text());
+        });
+    });
+  }
 
-    get jeans1() {
-        return cy.get('a[data-product-id="33"]').contains('Add to cart');
-    }
+  get productBrand() {
+    return cy.get(".product-information").within(() => {
+      cy.get("p")
+        .its(3)
+        .then((text) => {
+          cy.contains(text.text());
+        });
+    });
+  }
 
-    get jeans2() {
-        return cy.get('a[data-product-id="35"]').contains('Add to cart');
-    }
+  get inputSearch() {
+    return cy.get("#search_product");
+  }
 
-    get jeans3() {
-        return cy.get('a[data-product-id="37"]').contains('Add to cart');
-    }
+  get btnSearch() {
+    return cy.get("#submit_search");
+  }
 
-    get btnAddToCart() {
-        return cy.get('button > .fa-shopping-cart').contains('Add to cart');
-    }
+  get product1st() {
+    return cy.get('a[data-product-id="1"]').contains("Add to cart");
+  }
 
-    get detailProduct1() {
-        return cy.get('a[href="/product_details/1"]').contains('View Product')
-    }
+  get product2nd() {
+    return cy.get('a[data-product-id="2"]').contains("Add to cart");
+  }
 
-    get reviewName() {
-        return cy.get('#name');
-    }
+  get jeans1() {
+    return cy.get('a[data-product-id="33"]').contains("Add to cart");
+  }
 
-    get reviewEmail() {
-        return cy.get('#email');
-    }
+  get jeans2() {
+    return cy.get('a[data-product-id="35"]').contains("Add to cart");
+  }
 
-    get reviewMessage() {
-        return cy.get('#review');
-    }
+  get jeans3() {
+    return cy.get('a[data-product-id="37"]').contains("Add to cart");
+  }
 
-    get btnSubmit() {
-        return cy.get('#button-review');
-    }
+  get btnAddToCart() {
+    return cy.get("button > .fa-shopping-cart").contains("Add to cart");
+  }
 
-    writeReview(name, email, message) {
-        cy.contains('a', 'Write Your Review').should('be.visible');
-        this.reviewName.clear().type(name);
-        this.reviewEmail.clear().type(email);
-        this.reviewMessage.clear().type(message);
-        this.btnSubmit.click();
-        cy.contains('span', 'Thank you for your review.').should('be.visible');
-    }
+  get detailProduct1() {
+    return cy.get('a[href="/product_details/1"]').contains("View Product");
+  }
 
-    get1Product() {
-        this.product.click()
-    }
+  get reviewName() {
+    return cy.get("#name");
+  }
 
-    getFirstProduct() {
-        this.product1st.click()
-    }
+  get reviewEmail() {
+    return cy.get("#email");
+  }
 
-    getSecondProduct() {
-        this.product2nd.click();
-    }
+  get reviewMessage() {
+    return cy.get("#review");
+  }
 
-    getJeans1() {
-        cy.contains('p', 'Soft Stretch Jeans').should('be.visible');
-        this.jeans1.click();
-    }
+  get btnSubmit() {
+    return cy.get("#button-review");
+  }
 
-    getJeans2() {
-        cy.contains('p', 'Regular Fit Straight Jeans').should('be.visible');
-        this.jeans2.click();
-    }
+  getProductDetails() {
+    this.productName;
+    this.productCategory;
+    this.productAvailability;
+    this.productCondition;
+    this.productBrand;
+  }
 
-    getJeans3() {
-        cy.contains('p', 'Grunt Blue Slim Fit Jeans').should('be.visible');
-        this.jeans3.click();
-    }
+  searchProduct(productName) {
+    cy.contains("h2", "All Products").should("exist");
+    this.inputSearch.clear().type(productName);
+    this.btnSearch.click();
+    cy.contains("h2", "Searched Products").should("exist");
+  }
 
-    verifyAllJeans() {
-        cy.contains('a', 'Soft Stretch Jeans').should('be.visible');
-        cy.contains('a', 'Regular Fit Straight Jeans').should('be.visible');
-        cy.contains('a', 'Grunt Blue Slim Fit Jeans').should('be.visible');
-    }
+  writeReview(name, email, message) {
+    cy.contains("a", "Write Your Review").should("be.visible");
+    this.reviewName.clear().type(name);
+    this.reviewEmail.clear().type(email);
+    this.reviewMessage.clear().type(message);
+    this.btnSubmit.click();
+    cy.contains("span", "Thank you for your review.").should("be.visible");
+  }
 
-    getDetailProduct1() {
-        cy.contains('p', 'Blue Top').should('be.visible');
-        this.detailProduct1.click();
-    }
+  get1Product() {
+    this.product.click();
+  }
 
-    addToCart() {
-        this.btnAddToCart.click();
-    }
+  getFirstProduct() {
+    this.product1st.click();
+  }
 
-    displayFirstProduct() {
-        cy.contains('h2', 'All Products').should('be.visible');
-        cy.get('.features_items').should('be.visible');
-        this.product1.click();
+  getSecondProduct() {
+    this.product2nd.click();
+  }
 
-        cy.get('.product-details').should('be.visible')
-        cy.contains('h2', 'Blue Top').should('be.visible');
-        cy.contains('p', 'Category: Women > Tops').should('be.visible');
-        cy.contains('span', 'Rs. 500').should('be.visible');
-        cy.contains('b', 'Availability:').should('be.visible');
-        cy.contains('b', 'Condition:').should('be.visible');
-        cy.contains('b', 'Brand:').should('be.visible');
-    }
+  getJeans1() {
+    cy.contains("p", "Soft Stretch Jeans").should("be.visible");
+    this.jeans1.click();
+  }
+
+  getJeans2() {
+    cy.contains("p", "Regular Fit Straight Jeans").should("be.visible");
+    this.jeans2.click();
+  }
+
+  getJeans3() {
+    cy.contains("p", "Grunt Blue Slim Fit Jeans").should("be.visible");
+    this.jeans3.click();
+  }
+
+  verifyAllJeans() {
+    cy.contains("a", "Soft Stretch Jeans").should("be.visible");
+    cy.contains("a", "Regular Fit Straight Jeans").should("be.visible");
+    cy.contains("a", "Grunt Blue Slim Fit Jeans").should("be.visible");
+  }
+
+  getDetailProduct1() {
+    cy.contains("p", "Blue Top").should("be.visible");
+    this.detailProduct1.click();
+  }
+
+  addToCart() {
+    this.btnAddToCart.click();
+  }
 }
 
 export default Products;

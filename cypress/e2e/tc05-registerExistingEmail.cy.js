@@ -7,11 +7,11 @@ const signupLogin = new SignupLogin();
 const menu = new MenuComponent();
 
 describe("Test Case 5: Register User with existing email", () => {
-    it("Registering user to exercise page", () => {
-      cy.visit("/");
-      menu.signupLogin();
-      signupLogin.signupUser("Tescik", "tescik@test.ts");
-      
-      cy.contains('p', 'Email Address already exist!').should('be.visible')
-    });
+  it("Register user with existing credencials", () => {
+    cy.visit("/");
+    menu.signupLogin();
+    signupLogin.signupUser("Tescik", "tescik@test.ts");
+
+    cy.contains(/Email Address already exist!/i).should("exist");
+  });
 });

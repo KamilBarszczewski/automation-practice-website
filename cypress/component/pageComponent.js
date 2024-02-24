@@ -7,114 +7,81 @@ import Payment from "../pages/payment.cy";
 import Products from "../pages/products.cy";
 
 class PageComponent {
+  products = new Products();
+  payment = new Payment();
+  checkout = new Checkout();
+  cart = new Cart();
+  contactUs = new ContactUs();
 
+  get btnContinueShopping() {
+    return cy.get('button[data-dismiss="modal"]').contains("Continue Shopping");
+  }
 
-    products = new Products();
-    payment = new Payment();
-    checkout = new Checkout();
-    cart = new Cart();
-    contactUs = new ContactUs();
+  get linkViewCart() {
+    return cy.get('a[href="/view_cart"] > u');
+  }
 
-    get inputSearch() {
-        return cy.get('#search_product');
-    }
+  get linkWomen() {
+    return cy.get('a[href="#Women"]');
+  }
 
-    get inputSubscribe() {
-        return cy.get('#susbscribe_email');
-    }
+  get linkMen() {
+    return cy.get('a[href="#Men"]');
+  }
 
-    get btnSearch() {
-        return cy.get('#submit_search');
-    }
+  get linkDress() {
+    return cy.get('a[href="/category_products/1"]').contains("Dress");
+  }
 
-    get btnSubscribe() {
-        return cy.get('#subscribe');
-    }
+  get linkTshirts() {
+    return cy.get('a[href="/category_products/3"]').contains("Tshirts");
+  }
 
-    get btnContinueShopping() {
-        return cy.get('button[data-dismiss="modal"]')
-        .contains("Continue Shopping");
-    }
+  get linkPolo() {
+    return cy.get('a[href="/brand_products/Polo"]').contains("Polo");
+  }
 
-    get linkViewCart() {
-        return cy.get('a[href="/view_cart"] > u');
-    }
+  get linkHM() {
+    return cy.get('a[href="/brand_products/H&M"]').contains("H&M");
+  }
 
-    get linkWomen() {
-        return cy.get('a[href="#Women"]');
-    }
+  continueShopping() {
+    cy.contains("h4", "Added!").should("be.visible");
+    this.btnContinueShopping.click();
+  }
 
-    get linkMen() {
-        return cy.get('a[href="#Men"]');
-    }
+  viewCart() {
+    cy.contains("u", "View Cart").should("be.visible");
+    this.linkViewCart.click();
+  }
 
-    get linkDress() {
-        return cy.get('a[href="/category_products/1"]').contains('Dress');
-    }
+  categoryWomen() {
+    this.linkWomen.click();
+  }
 
-    get linkTshirts() {
-        return cy.get('a[href="/category_products/3"]').contains('Tshirts');
-    }
+  categoryMen() {
+    this.linkMen.click();
+  }
 
-    get linkPolo() {
-        return cy.get('a[href="/brand_products/Polo"]').contains('Polo');
-    }
+  subcategoryDress() {
+    this.linkDress.click();
+    cy.contains("h2", "Women - Dress Products");
+  }
 
-    get linkHM() {
-        return cy.get('a[href="/brand_products/H&M"]').contains('H&M');
-    }
+  subcategoryTshirts() {
+    this.linkTshirts.click();
+    cy.contains("h2", "Men - Tshirts Products");
+  }
 
-    continueShopping() {
-        cy.contains('h4', 'Added!').should('be.visible');
-        this.btnContinueShopping.click();
-    }
-    
-    searchProduct(productName) {
-        cy.contains('h2', 'All Products').should('be.visible');
-        this.inputSearch.clear().type(productName);
-        this.btnSearch.click();
-        cy.contains('h2', 'Searched Products').should('be.visible');
-    }
+  brandPolo() {
+    this.linkPolo.click();
+    cy.contains("h2", "Brand - Polo Products");
+  }
 
-    subscribe(email) {
-        cy.contains('h2', 'Subscription').should('be.visible');
-        this.inputSubscribe.scrollIntoView().clear().type(email);
-        this.btnSubscribe.click();
-        cy.get('#success-subscribe').should('be.visible');
-    }
-
-    viewCart() {
-        cy.contains('u', 'View Cart').should('be.visible');
-        this.linkViewCart.click();
-    }
-
-    categoryWomen() {
-        this.linkWomen.click();
-    }
-
-    categoryMen() {
-        this.linkMen.click();
-    }
-
-    subcategoryDress() {
-        this.linkDress.click();
-        cy.contains('h2', 'Women - Dress Products');
-    }
-
-    subcategoryTshirts() {
-        this.linkTshirts.click();
-        cy.contains('h2', 'Men - Tshirts Products');
-    }
-
-    brandPolo() {
-        this.linkPolo.click();
-        cy.contains('h2', 'Brand - Polo Products');
-    }
-
-    brandHM() {
-        this.linkHM.click();
-        cy.contains('h2', 'Brand - H&M Products');
-    }
+  brandHM() {
+    this.linkHM.click();
+    cy.contains("h2", "Brand - H&M Products");
+  }
 }
 
 export default PageComponent;

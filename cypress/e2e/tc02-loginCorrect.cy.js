@@ -13,7 +13,8 @@ describe("Test Case 2: Login User with correct email and password", () => {
     // REGISTERING USER
     signupLogin.signupUser("Tescik", "tescik@test.ts");
     // ENTER ACCOUNT INFORMATION
-    signupLogin.signup.createAcc(
+    signupLogin.signup.createUser(
+      "Tescik",
       "testowy@",
       "30",
       "10",
@@ -29,15 +30,18 @@ describe("Test Case 2: Login User with correct email and password", () => {
       "555333111",
       "0021455535299"
     );
-    menu.logoutAccount();
+    menu.logoutUser();
   });
 
   it("Log in user with correct login and passworrd", () => {
     cy.visit("/");
     menu.signupLogin();
     signupLogin.loginUser("tescik@test.ts", "testowy@");
+    cy.contains("a", " Logged in as ").should("exist");
+  });
 
+  after(() => {
     // DELETE USER
-    menu.deleteAccount();
+    menu.deleteUser();
   });
 });

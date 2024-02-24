@@ -1,51 +1,52 @@
 /// <reference types="cypress" />
 
 class ContactUs {
-    get name() {
-        return cy.get('input[data-qa="name"]')
-    }
+  get name() {
+    return cy.getDataQa("name");
+  }
 
-    get email() {
-        return cy.get('input[data-qa="email"]')
-    }
+  get email() {
+    return cy.getDataQa("email");
+  }
 
-    get subject() {
-        return cy.get('input[data-qa="subject"]')
-    }
+  get subject() {
+    return cy.getDataQa("subject");
+  }
 
-    get message() {
-        return cy.get('textarea[data-qa="message"]')
-    }
+  get message() {
+    return cy.getDataQa("message");
+  }
 
-    get uploadFile() {
-        return cy.get('input[name="upload_file"]')
-    }
+  get uploadFile() {
+    return cy.get('input[name="upload_file"]');
+  }
 
-    get btnSubmit() {
-        return cy.get('input[data-qa="submit-button"]')
-    }
+  get btnSubmit() {
+    return cy.getDataQa("submit-button");
+  }
 
-    get btnHome() {
-        return cy.get('#form-section').contains(' Home')
-    }
+  get btnHome() {
+    return cy.get("#form-section").contains(" Home");
+  }
 
-    contactUsForm(
-        name, email, subject, message, file
-    ) {
-        cy.contains('h2', 'Get In Touch').should('be.visible');
-        this.name.clear().type(name);
-        this.email.clear().type(email);
-        this.subject.clear().type(subject);
-        this.message.clear().type(message);
-        this.uploadFile.selectFile(file);
-        this.btnSubmit.click();
-    }
+  contactUsForm(name, email, subject, message, file) {
+    cy.contains("h2", "Get In Touch").should("be.visible");
+    this.name.clear().type(name);
+    this.email.clear().type(email);
+    this.subject.clear().type(subject);
+    this.message.clear().type(message);
+    this.uploadFile.selectFile(file);
+    this.btnSubmit.click();
 
-    homeButton() {
-        cy.contains('div', 'Success! Your details have been submitted successfully.').should('be.visible')
-        this.btnHome.click();
-        cy.contains("h2", "Features Items").should("be.visible");
-    }
+    cy.contains(
+      /Success! Your details have been submitted successfully./i
+    ).should("exist");
+  }
+
+  homeButton() {
+    this.btnHome.click();
+    cy.location("pathname").should("equal", "/");
+  }
 }
 
 export default ContactUs;

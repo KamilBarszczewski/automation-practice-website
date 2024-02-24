@@ -16,7 +16,7 @@ describe("Test Case 1: Register User", () => {
     // REGISTERING USER
     signupLogin.signupUser("Tescik", "tescik@test.ts");
     // ENTER ACCOUNT INFORMATION
-    signupLogin.signup.createAcc(
+    signupLogin.signup.createUser(
       "Tescik",
       "testowy@",
       "30",
@@ -33,8 +33,10 @@ describe("Test Case 1: Register User", () => {
       "555333111",
       "0021455535299"
     );
+  });
 
-    // DELETE ACCOUNT
-    menu.deleteAccount();
+  after(() => {
+    // DELETE USER
+    menu.deleteUser();
   });
 });
