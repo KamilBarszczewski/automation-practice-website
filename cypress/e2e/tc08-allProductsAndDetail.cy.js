@@ -12,7 +12,6 @@ describe("Test Case 8: Verify All Products and product detail page", () => {
     cy.location("pathname").should("equal", "/");
 
     menu.products();
-    //page.products.displayFirstProduct();
     cy.getProduct(1);
     cy.location("pathname").should("equal", "/product_details/1");
 

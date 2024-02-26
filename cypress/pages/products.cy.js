@@ -78,7 +78,9 @@ class Products {
   }
 
   get btnAddToCart() {
-    return cy.get("button > .fa-shopping-cart").contains("Add to cart");
+    return cy.get('button[type="button"]').within(() => {
+      cy.contains("Add to cart");
+    });
   }
 
   get detailProduct1() {
@@ -163,7 +165,7 @@ class Products {
     this.detailProduct1.click();
   }
 
-  addToCart() {
+  buttonAddToCart() {
     this.btnAddToCart.click();
   }
 }

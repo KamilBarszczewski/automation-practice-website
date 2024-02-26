@@ -7,21 +7,22 @@ const menu = new MenuComponent();
 const page = new PageComponent();
 
 describe("Test Case 12: Add Products in Cart", () => {
-    it("Adding products in Cart PAge", () => {
-        cy.visit("/");
-        menu.products();
+  it("Add products to Cart", () => {
+    cy.visit("/");
+    cy.location("pathname").should("equal", "/");
 
-        page.products.getFirstProduct();
-        page.continueShopping();
-        page.products.getSecondProduct();
-        page.viewCart();
+    menu.products();
+    cy.addToCart(3);
+    page.continueShopping();
+    cy.addToCart(4);
+    page.viewCart();
 
-        cy.contains('#product-1', 'Blue Top', 'Rs. 500', ).should('be.visible');
-        cy.contains('#product-1 > .cart_quantity', '1').should('be.visible');
-        cy.contains('#product-1 > .cart_total', 'Rs. 500').should('be.visible');
+    page.cart.getProductPrice(1);
+    page.cart.getProductQuantity(1);
+    page.cart.getTotalPrice(1);
 
-        cy.contains('#product-2', 'Men Tshirt', 'Rs. 400', ).should('be.visible');
-        cy.contains('#product-2 > .cart_quantity', '1').should('be.visible');
-        cy.contains('#product-2 > .cart_total', 'Rs. 400').should('be.visible');
-    });
+    page.cart.getProductPrice(2);
+    page.cart.getProductQuantity(2);
+    page.cart.getTotalPrice(2);
+  });
 });
