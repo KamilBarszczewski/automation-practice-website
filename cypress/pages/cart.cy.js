@@ -8,7 +8,7 @@ class Cart {
   get btnSubscribe() {
     return cy.get("#subscribe");
   }
-git add .
+
   get productPrice() {
     return cy.get('td[class="cart_price"] > p');
   }
