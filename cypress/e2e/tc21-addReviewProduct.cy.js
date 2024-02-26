@@ -9,8 +9,9 @@ const menu = new MenuComponent();
 describe("Test Case 21: Add review on product", () => {
   it("Adding review", () => {
     cy.visit("/");
+    cy.location("pathname").should("equal", "/");
     menu.products();
-    page.products.getDetailProduct1();
-    page.products.writeReview('Tescik', 'tescik@test.ts', 'test message');
+    cy.getProduct(3);
+    page.products.writeReview("Tescik", "tescik@test.ts", "test message");
   });
 });

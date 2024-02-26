@@ -9,39 +9,50 @@ const signupLogin = new SignupLogin();
 const page = new PageComponent();
 
 describe("Test Case 15: Place Order: Register before Checkout", () => {
-  it("registering user then checkout", () => {
+  it("register user then checkout", () => {
     cy.visit("/");
+    cy.location("pathname").should("equal", "/");
     menu.signupLogin();
-     // REGISTERING USER
-     signupLogin.signupUser("Tescik", "tescik@test.ts");
-     // ENTER ACCOUNT INFORMATION
-     signupLogin.signup.enterAccInfo("testowy@", "30", "10", "1955");
-     signupLogin.signup.addressInfo(
-       "Testeusz",
-       "Testeuszewicz",
-       "Test-Soft",
-       "Testowa 11",
-       "Testowa 21",
-       "United States",
-       "Nevada",
-       "Testowo Testowe",
-       "555333111",
-       "0021455535299"
-     );
- 
-    menu.products();
-    page.products.getFirstProduct();
-    page.continueShopping();
-    page.products.getSecondProduct();
-    page.viewCart();
-    page.cart.checkout();
-    page.checkout.placeOrder('Test message');
-    page.payment.confirmPayment(
-      'Testeusz Testeuszewicz', '123456789', '123', '123', '2025'
+
+    // REGISTERING USER
+    signupLogin.signupUser("Tescik", "tescik@test.ts");
+    // ENTER ACCOUNT INFORMATION
+    signupLogin.signup.createUser(
+      "Tescik",
+      "testowy@",
+      "30",
+      "10",
+      "1955",
+      "Testeusz",
+      "Testeuszewicz",
+      "Test-Soft",
+      "Testowa 11",
+      "Testowa 21",
+      "United States",
+      "Nevada",
+      "Testowo Testowe",
+      "555333111",
+      "0021455535299"
     );
 
-   // DELETE USER
-   menu.deleteAccount();
+    cy.addToCart(5);
+    page.continueShopping();
+    cy.addToCart(8);
+    page.viewCart();
+    page.cart.checkout();
+    page.checkout.placeOrder("test message");
+    page.payment.confirmPayment(
+      "Testeusz Testeuszewicz",
+      "123456789",
+      "123",
+      "123",
+      "2025"
+    );
+
+    page.payment.continueButton();
+  });
+
+  after("Deleting user", () => {
+    menu.deleteUser();
   });
 });
-

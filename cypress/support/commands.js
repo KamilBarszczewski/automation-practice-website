@@ -12,13 +12,22 @@ Cypress.Commands.add("getSubpage", (sub_page) => {
 
 Cypress.Commands.add("addToCart", (productNumber) => {
   return cy.get('div[class="features_items"]').within(() => {
-    cy.get('div[class="single-products"]')
-      .its(productNumber - 1)
-      .within(() => {
-        cy.get(`a[data-product-id="${productNumber}"]`)
-          .contains("Add to cart")
-          .invoke("show")
-          .click();
-      });
+    cy.get(`a[data-product-id="${productNumber}"]`)
+      .contains("Add to cart")
+      .invoke("show")
+      .click();
   });
 });
+
+// Cypress.Commands.add("addToCart", (productNumber) => {
+//   return cy.get('div[class="features_items"]').within(() => {
+//     cy.get('div[class="single-products"]')
+//       .its(productNumber - 1)
+//       .within(() => {
+//         cy.get(`a[data-product-id="${productNumber}"]`)
+//           .contains("Add to cart")
+//           .invoke("show")
+//           .click();
+//       });
+//   });
+// });

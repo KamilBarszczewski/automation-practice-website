@@ -12,9 +12,9 @@ describe("Test Case 12: Add Products in Cart", () => {
     cy.location("pathname").should("equal", "/");
 
     menu.products();
-    cy.addToCart(3);
+    cy.addToCart(1);
     page.continueShopping();
-    cy.addToCart(4);
+    cy.addToCart(2);
     page.viewCart();
 
     page.cart.getProductPrice(1);

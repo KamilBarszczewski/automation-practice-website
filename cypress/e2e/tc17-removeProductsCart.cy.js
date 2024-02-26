@@ -7,14 +7,14 @@ const page = new PageComponent();
 describe("Test Case 17: Remove Products From Cart", () => {
   it("removing products", () => {
     cy.visit("/");
-    cy.contains("h2", "Features Items").should("be.visible");
+    cy.location("pathname").should("equal", "/");
 
-    page.products.getFirstProduct();
+    cy.addToCart(3);
     page.continueShopping();
-    page.products.getSecondProduct();
+    cy.addToCart(6);
     page.viewCart();
-    page.cart.removeFirstProduct();
-    page.cart.removeSecondProduct();
-    cy.contains('b', 'Cart is empty!')
+    page.cart.removeProduct(3);
+    page.cart.removeProduct(6);
+    cy.contains("b", "Cart is empty!");
   });
 });

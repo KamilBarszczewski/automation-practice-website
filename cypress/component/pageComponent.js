@@ -29,6 +29,10 @@ class PageComponent {
     return cy.get('a[href="#Men"]');
   }
 
+  get linkKids() {
+    return cy.get('a[href="#Kids"]');
+  }
+
   get linkDress() {
     return cy.get('a[href="/category_products/1"]').contains("Dress");
   }
@@ -61,6 +65,10 @@ class PageComponent {
 
   categoryMen() {
     this.linkMen.click();
+  }
+
+  categoryKids() {
+    this.categoryKids.click();
   }
 
   subcategoryDress() {

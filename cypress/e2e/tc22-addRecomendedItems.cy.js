@@ -9,10 +9,15 @@ const menu = new MenuComponent();
 describe("Test Case 22: Add to cart from Recommended items", () => {
   it("Adding to cart", () => {
     cy.visit("/");
-    cy.contains('h2', 'recommended items').scrollIntoView().should('be.visible')
-    cy.get('.recommended-item-carousel').contains('[data-product-id="4"]').click();
+    cy.location("pathname").should("equal", "/");
+    cy.contains(/recommended items/i).should("exist");
 
-       
-    
+    cy.get("#recommended-item-carousel").within(() => {
+      cy.get('[data-slide="next"]').click();
+      cy.get('[data-product-id="3"]').click();
+    });
+
+    page.viewCart();
+    page.cart.getProductName(3);
   });
 });

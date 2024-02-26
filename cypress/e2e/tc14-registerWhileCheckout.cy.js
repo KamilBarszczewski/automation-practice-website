@@ -11,23 +11,21 @@ const signupLogin = new SignupLogin();
 describe("Test Case 14: Place Order: Register while Checkout", () => {
   it("Veryfying product quantities", () => {
     cy.visit("/");
-    cy.contains("h2", "Features Items").should("be.visible");
-    cy.get('a[data-product-id="3"]')
-      .contains("Add to cart")
-      .invoke("show")
-      .click();
-    cy.get('button[data-dismiss="modal"]')
-      .contains("Continue Shopping")
-      .click();
-    cy.get('a[href="/view_cart"]').contains(" Cart").click({ force: true });
-
+    cy.location("pathname").should("equal", "/");
+    cy.addToCart(3);
+    page.viewCart();
     page.cart.checkout();
-    page.cart.navRegisterLogin();
+    cy.getSubpage("login").contains("Register / Login").click();
+
     // REGISTERING USER
-    signupLogin.signupUser('Tescik', 'tescik@test.ts');
+    signupLogin.signupUser("Tescik", "tescik@test.ts");
     // ENTER ACCOUNT INFORMATION
-    signupLogin.signup.enterAccInfo("testowy@", "30", "10", "1955");
-    signupLogin.signup.addressInfo(
+    signupLogin.signup.createUser(
+      "Tescik",
+      "testowy@",
+      "30",
+      "10",
+      "1955",
       "Testeusz",
       "Testeuszewicz",
       "Test-Soft",
@@ -42,12 +40,19 @@ describe("Test Case 14: Place Order: Register while Checkout", () => {
 
     menu.cart();
     page.cart.checkout();
-    page.checkout.placeOrder('Test message');
+    page.checkout.placeOrder("test message");
     page.payment.confirmPayment(
-      'Testeusz Testeuszewicz', '123456789', '123', '123', '2025'
+      "Testeusz Testeuszewicz",
+      "123456789",
+      "123",
+      "123",
+      "2025"
     );
 
-    // DELETE USER
-    menu.deleteAccount();
+    page.payment.continueButton();
+  });
+
+  after("Deleting user", () => {
+    menu.deleteUser();
   });
 });

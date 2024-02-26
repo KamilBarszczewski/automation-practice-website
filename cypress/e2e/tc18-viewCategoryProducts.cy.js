@@ -7,11 +7,11 @@ const page = new PageComponent();
 describe("Test Case 18: View Category Products", () => {
   it("exploring Category", () => {
     cy.visit("/");
-    cy.contains("h2", "Category").should("be.visible");
+    cy.location("pathname").should("equal", "/");
 
     page.categoryWomen();
     page.subcategoryDress();
-    
+
     page.categoryMen();
     page.subcategoryTshirts();
   });

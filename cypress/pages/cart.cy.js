@@ -21,10 +21,24 @@ class Cart {
     return cy.get('p[class="cart_total_price"]');
   }
 
+  get registerLogin() {
+    return cy.get('a[href="/login"]').contains("Register / Login");
+  }
+
+  get btnCheckout() {
+    return cy.contains(".check_out", "Proceed To Checkout");
+  }
+
+  getProductName(productId) {
+    cy.get(`[href="/product_details/${productId}"]`).then((name) => {
+      cy.contains(name.text()).should("exist");
+    });
+  }
+
   getProductPrice(productId) {
     cy.get(`#product-${productId}`).within(() => {
       this.productPrice.then((price) => {
-        cy.contains(price.text());
+        cy.contains(price.text()).should("exist");
       });
     });
   }
@@ -32,7 +46,7 @@ class Cart {
   getProductQuantity(productId) {
     cy.get(`#product-${productId}`).within(() => {
       this.productQuantity.then((quantity) => {
-        cy.contains(quantity.text());
+        cy.contains(quantity.text()).should("exist");
       });
     });
   }
@@ -40,25 +54,9 @@ class Cart {
   getTotalPrice(productId) {
     cy.get(`#product-${productId}`).within(() => {
       this.totalPrice.then((total) => {
-        cy.contains(total.text());
+        cy.contains(total.text()).should("exist");
       });
     });
-  }
-
-  get btnRemoveFirst() {
-    return cy.get('a[data-product-id="1"]');
-  }
-
-  get btnRemoveSecond() {
-    return cy.get('a[data-product-id="2"]');
-  }
-
-  get registerLogin() {
-    return cy.get('a[href="/login"]').contains("Register / Login");
-  }
-
-  get btnCheckout() {
-    return cy.contains(".check_out", "Proceed To Checkout");
   }
 
   subscribe(email) {
@@ -68,18 +66,8 @@ class Cart {
     cy.get("#success-subscribe").should("be.visible");
   }
 
-  getPrice(id) {
-    cy.get(`#product-${id}`).contains(this.productPrice);
-  }
-
-  removeFirstProduct() {
-    cy.contains("li", "Shopping Cart").should("be.visible");
-    this.btnRemoveFirst.click();
-  }
-
-  removeSecondProduct() {
-    cy.contains("li", "Shopping Cart").should("be.visible");
-    this.btnRemoveSecond.click();
+  removeProduct(productNumber) {
+    cy.get(`a[data-product-id=${productNumber}]`).click();
   }
 
   navRegisterLogin() {
@@ -87,7 +75,7 @@ class Cart {
   }
 
   checkout() {
-    cy.get(".active").contains("Shopping Cart").should("be.visible");
+    cy.contains("Shopping Cart").should("exist");
     this.btnCheckout.click();
   }
 }
