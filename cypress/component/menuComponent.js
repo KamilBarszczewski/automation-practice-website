@@ -1,6 +1,10 @@
 /// <reference types="cypress" />
 
 class MenuComponent {
+  get btnHome() {
+    return cy.get('[href="/"]');
+  }
+
   get btnProducts() {
     return cy.getSubpage("products").contains(" Products");
   }
@@ -31,6 +35,11 @@ class MenuComponent {
 
   get btnContinue() {
     return cy.getDataQa("continue-button");
+  }
+
+  home() {
+    this.btnHome.click();
+    cy.location("pathname").should("equal", "/");
   }
 
   products() {

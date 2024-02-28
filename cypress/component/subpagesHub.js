@@ -1,15 +1,15 @@
 /// <reference types="cypress" />
 
-import Cart from "../pages/cartPage.cy";
-import Checkout from "../pages/checkoutPage.cy";
-import ContactUs from "../pages/contactUsPage.cy";
-import Payment from "../pages/paymentPage.cy";
-import Products from "../pages/productsPage.cy";
+import CartPage from "../pages/cartPage.cy";
+import CheckoutPage from "../pages/checkoutPage.cy";
+import ContactUsPage from "../pages/contactUsPage.cy";
+import PaymentPage from "../pages/paymentPage.cy";
+import ProductPage from "../pages/productPage.cy";
 import HomePage from "../pages/homePage.cy";
 
 class SubpagesHub {
   home = new HomePage();
-  products = new ProductsPage();
+  products = new ProductPage();
   payment = new PaymentPage();
   checkout = new CheckoutPage();
   cart = new CartPage();
