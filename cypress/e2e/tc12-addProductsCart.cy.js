@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import MenuComponent from "./../component/menuComponent";
-import PageComponent from "../component/pageComponent";
+import PageComponent from "../component/subpagesHub";
 
 const menu = new MenuComponent();
 const page = new PageComponent();

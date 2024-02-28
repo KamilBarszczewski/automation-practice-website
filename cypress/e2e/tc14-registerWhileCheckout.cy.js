@@ -2,7 +2,7 @@
 
 import MenuComponent from "../component/menuComponent";
 import PageComponent from "../component/pageComponent";
-import SignupLogin from "../pages/signupLogin.cy";
+import SignupLogin from "../pages/loginPage";
 
 const menu = new MenuComponent();
 const page = new PageComponent();

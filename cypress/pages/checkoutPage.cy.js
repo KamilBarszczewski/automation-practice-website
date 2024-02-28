@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-class Checkout {
+class CheckoutPage {
   get inputMessage() {
     return cy.get('textarea[name="message"]');
   }
@@ -17,4 +17,4 @@ class Checkout {
   }
 }
 
-export default Checkout;
+export default CheckoutPage;

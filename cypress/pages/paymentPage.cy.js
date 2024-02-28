@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-class Payment {
+class PaymentPage {
   get inputCardName() {
     return cy.getDataQa("name-on-card");
   }
@@ -46,4 +46,4 @@ class Payment {
   }
 }
 
-export default Payment;
+export default PaymentPage;

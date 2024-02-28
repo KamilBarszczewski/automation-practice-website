@@ -1,18 +1,6 @@
 /// <reference types="cypress" />
 
-import Cart from "../pages/cart.cy";
-import Checkout from "../pages/checkout.cy";
-import ContactUs from "../pages/contactUs.cy";
-import Payment from "../pages/payment.cy";
-import Products from "../pages/products.cy";
-
-class PageComponent {
-  products = new Products();
-  payment = new Payment();
-  checkout = new Checkout();
-  cart = new Cart();
-  contactUs = new ContactUs();
-
+class HomePage {
   get btnContinueShopping() {
     return cy.get('button[data-dismiss="modal"]').contains("Continue Shopping");
   }
@@ -92,4 +80,4 @@ class PageComponent {
   }
 }
 
-export default PageComponent;
+export default HomePage;
