@@ -37,6 +37,14 @@ class HomePage {
     return cy.get('a[href="/brand_products/H&M"]').contains("H&M");
   }
 
+  get inputSubscribe() {
+    return cy.get("#susbscribe_email");
+  }
+
+  get btnSubscribe() {
+    return cy.get("#subscribe");
+  }
+
   continueShopping() {
     cy.contains("h4", "Added!").should("be.visible");
     this.btnContinueShopping.click();
@@ -77,6 +85,13 @@ class HomePage {
   brandHM() {
     this.linkHM.click();
     cy.contains("h2", "Brand - H&M Products");
+  }
+
+  subscribe(email) {
+    cy.contains(/Subscription/i).should("exist");
+    this.inputSubscribe.scrollIntoView().clear().type(email);
+    this.btnSubscribe.click();
+    cy.get("#success-subscribe").should("be.visible");
   }
 }
 
