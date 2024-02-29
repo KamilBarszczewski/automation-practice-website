@@ -2,10 +2,8 @@
 import MenuComponent from "../component/menuComponent";
 import SubpagesHub from "../component/subpagesHub";
 import LoginPage from "../pages/loginPage.cy";
-import HomePage from "../pages/homePage.cy";
 
 const menu = new MenuComponent();
-const home = new HomePage();
 const hub = new SubpagesHub();
 const login = new LoginPage();
 
@@ -134,7 +132,8 @@ describe("interaction with checkout", () => {
     hub.payment.continueButton();
   });
 
-  it("TC 24: download invoice after purchase order", () => {
+  it.only("TC 24: download invoice after purchase order", () => {
+    cy.task("deleteDownloads");
     cy.addToCart(3);
     hub.home.continueShopping();
     cy.addToCart(4);
@@ -176,6 +175,11 @@ describe("interaction with checkout", () => {
     );
 
     hub.payment.downloadInvoiceButton();
+    cy.readFile("cypress/downloads/invoice.txt").should(
+      "equal",
+      "Hi Testeusz Testeuszewicz, Your total purchase amount is 2500. Thank you"
+    );
+
     hub.payment.continueButton();
   });
 
