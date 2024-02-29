@@ -1,14 +1,51 @@
 /// <reference types="cypress" />
 import MenuComponent from "../component/menuComponent";
+import LoginPage from "../pages/loginPage.cy";
 import SubpagesHub from "../component/subpagesHub";
 
 const menu = new MenuComponent();
+const login = new LoginPage();
 const hub = new SubpagesHub();
 
 describe("verify pages", () => {
+  before("register user", () => {
+    cy.visit("/");
+    cy.location("pathname").should("equal", "/");
+    menu.signupLogin();
+    login.signupUser("Tescik", "tescik@test.ts");
+    login.signup.createUser(
+      "Tescik",
+      "testowy@",
+      "30",
+      "10",
+      "1955",
+      "Testeusz",
+      "Testeuszewicz",
+      "Test-Soft",
+      "Testowa 11",
+      "Testowa 21",
+      "United States",
+      "Nevada",
+      "Testowo Testowe",
+      "555333111",
+      "0021455535299"
+    );
+  });
+
   beforeEach("", () => {
     cy.visit("/");
     cy.location("pathname").should("equal", "/");
+  });
+
+  it("TC 23: verify address details in checkout page", () => {
+    cy.addToCart(3);
+    hub.home.continueShopping();
+    cy.addToCart(1);
+    hub.home.viewCart();
+
+    hub.cart.checkout();
+    hub.checkout.verifyDeliveryAddress();
+    hub.checkout.verifyInvoiceAddress();
   });
 
   it("TC 7: verify Test Cases page", () => {
@@ -31,5 +68,11 @@ describe("verify pages", () => {
   it("TC 11: veryfy subscription in cart page", () => {
     menu.cart();
     hub.cart.subscribe("tescik@test.ts");
+  });
+
+  after("delete user", () => {
+    menu.signupLogin();
+    login.loginUser("tescik@test.ts", "@testowy");
+    menu.deleteUser();
   });
 });
