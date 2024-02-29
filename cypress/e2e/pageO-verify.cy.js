@@ -70,9 +70,26 @@ describe("verify pages", () => {
     hub.cart.subscribe("tescik@test.ts");
   });
 
+  it("TC 25: verify scroll up using Arrow and scroll down functionality", () => {
+    cy.contains("h2", "Subscription").scrollIntoView();
+    cy.wait(2000);
+    cy.get("#scrollUp").scrollIntoView().click();
+    cy.contains(
+      /Full-Fledged practice website for Automation Engineers/i
+    ).should("be.visible");
+  });
+
+  it("TC 26: verify scroll up and scroll down functionality", () => {
+    cy.contains("h2", "Subscription").scrollIntoView();
+    cy.wait(2000);
+    cy.contains(/Full-Fledged practice website for Automation Engineers/i)
+      .should("be.visible")
+      .scrollIntoView();
+  });
+
   after("delete user", () => {
     menu.signupLogin();
-    login.loginUser("tescik@test.ts", "@testowy");
+    login.loginUser("tescik@test.ts", "testowy@");
     menu.deleteUser();
   });
 });

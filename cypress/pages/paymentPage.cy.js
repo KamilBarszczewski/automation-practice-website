@@ -29,6 +29,10 @@ class PaymentPage {
     return cy.getDataQa("continue-button");
   }
 
+  get invoice() {
+    return cy.contains("Download Invoice").should("exist");
+  }
+
   confirmPayment(cardName, cardNumber, cardCvc, expMonth, expYear) {
     this.inputCardName.clear().type(cardName);
     this.inputCardNumber.clear().type(cardNumber);
@@ -39,6 +43,10 @@ class PaymentPage {
     cy.contains("p", "Congratulations! Your order has been confirmed!").should(
       "be.visible"
     );
+  }
+
+  downloadInvoiceButton() {
+    this.invoice.click();
   }
 
   continueButton() {
