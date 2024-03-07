@@ -1,22 +1,20 @@
 /// <reference types="cypress" />
+import MenuComponent from "../component/menuComponent";
+import LoginPage from "../pages/loginPage.cy";
 
-import SignupLogin from "./../pages/signupLogin.cy";
-import MenuComponent from "./../component/menuComponent";
-
-const signupLogin = new SignupLogin();
 const menu = new MenuComponent();
+const login = new LoginPage();
 
-describe("Test Case 1: Register User", () => {
-  beforeEach(() => {
+describe("register user", () => {
+  before("go to landing page", () => {
     cy.visit("/");
+    cy.location("pathname").should("equal", "/");
   });
 
-  it("register and delete User", () => {
+  it("successfully register user", () => {
     menu.signupLogin();
-    // REGISTERING USER
-    signupLogin.signupUser("Tescik", "tescik@test.ts");
-    // ENTER ACCOUNT INFORMATION
-    signupLogin.signup.createUser(
+    login.signupUser("Tescik", "tescik@test.ts");
+    login.signup.createUser(
       "Tescik",
       "testowy@",
       "30",
@@ -36,7 +34,7 @@ describe("Test Case 1: Register User", () => {
   });
 
   after(() => {
-    // DELETE USER
+    cy.pause();
     menu.deleteUser();
   });
 });

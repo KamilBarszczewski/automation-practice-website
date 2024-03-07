@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-class Payment {
+class PaymentPage {
   get inputCardName() {
     return cy.getDataQa("name-on-card");
   }
@@ -29,6 +29,10 @@ class Payment {
     return cy.getDataQa("continue-button");
   }
 
+  get invoice() {
+    return cy.contains("Download Invoice").should("exist");
+  }
+
   confirmPayment(cardName, cardNumber, cardCvc, expMonth, expYear) {
     this.inputCardName.clear().type(cardName);
     this.inputCardNumber.clear().type(cardNumber);
@@ -41,9 +45,13 @@ class Payment {
     );
   }
 
+  downloadInvoiceButton() {
+    this.invoice.click();
+  }
+
   continueButton() {
     this.btnContinue.click();
   }
 }
 
-export default Payment;
+export default PaymentPage;

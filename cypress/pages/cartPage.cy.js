@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-class Cart {
+class CartPage {
   get inputSubscribe() {
     return cy.get("#susbscribe_email");
   }
@@ -80,4 +80,4 @@ class Cart {
   }
 }
 
-export default Cart;
+export default CartPage;

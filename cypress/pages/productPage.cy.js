@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-class Products {
+class ProductPage {
   get productName() {
     return cy.get(".product-information").within(() => {
       cy.get("h2").then((name) => {
@@ -108,4 +108,4 @@ class Products {
   }
 }
 
-export default Products;
+export default ProductPage;
