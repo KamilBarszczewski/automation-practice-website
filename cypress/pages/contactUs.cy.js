@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-class ContactUsPage {
+class ContactUs {
   get name() {
     return cy.getDataQa("name");
   }
@@ -49,4 +49,4 @@ class ContactUsPage {
   }
 }
 
-export default ContactUsPage;
+export default ContactUs;

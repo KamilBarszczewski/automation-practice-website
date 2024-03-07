@@ -1,6 +1,18 @@
 /// <reference types="cypress" />
 
-class HomePage {
+import Cart from "../pages/cart.cy";
+import Checkout from "../pages/checkout.cy";
+import ContactUs from "../pages/contactUs.cy";
+import Payment from "../pages/payment.cy";
+import Products from "../pages/products.cy";
+
+class PageComponent {
+  products = new Products();
+  payment = new Payment();
+  checkout = new Checkout();
+  cart = new Cart();
+  contactUs = new ContactUs();
+
   get btnContinueShopping() {
     return cy.get('button[data-dismiss="modal"]').contains("Continue Shopping");
   }
@@ -35,14 +47,6 @@ class HomePage {
 
   get linkHM() {
     return cy.get('a[href="/brand_products/H&M"]').contains("H&M");
-  }
-
-  get inputSubscribe() {
-    return cy.get("#susbscribe_email");
-  }
-
-  get btnSubscribe() {
-    return cy.get("#subscribe");
   }
 
   continueShopping() {
@@ -86,13 +90,6 @@ class HomePage {
     this.linkHM.click();
     cy.contains("h2", "Brand - H&M Products");
   }
-
-  subscribe(email) {
-    cy.contains(/Subscription/i).should("exist");
-    this.inputSubscribe.scrollIntoView().clear().type(email);
-    this.btnSubscribe.click();
-    cy.get("#success-subscribe").should("be.visible");
-  }
 }
 
-export default HomePage;
+export default PageComponent;

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-class SignupPage {
+class Signup {
   // Account Information
   get mrTitle() {
     return cy.get("#id_gender1");
@@ -129,4 +129,4 @@ class SignupPage {
   }
 }
 
-export default SignupPage;
+export default Signup;

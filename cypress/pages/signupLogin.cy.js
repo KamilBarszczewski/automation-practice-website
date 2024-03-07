@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-import SignupPage from "./signupPage.cy";
+import Signup from "./signup.cy";
 
-class LoginPage {
-  signup = new SignupPage();
+class SignupLogin {
+  signup = new Signup();
 
   get signupName() {
     return cy.getDataQa("signup-name");
@@ -46,4 +46,4 @@ class LoginPage {
   }
 }
 
-export default LoginPage;
+export default SignupLogin;
