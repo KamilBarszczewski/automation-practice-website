@@ -52,12 +52,12 @@ class CheckoutPage {
   get totalPrice() {
     return cy.get("tbody").within(() => {
       cy.get("tr")
-        .its(2)
+        .last()
         .within(() => {
           cy.get("td")
-            .its(3)
+            .last()
             .then((totalPrice) => {
-              cy.contains(totalPrice.text());
+              cy.contains(totalPrice.text()).should("exist");
             });
         });
     });

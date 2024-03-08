@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "open": "npx cypress open",
+    "checkout": "npx cypress run --spec 'cypress/e2e/pageO-checkout.cy.js' -b chrome",
     "tc1": "npx cypress run --spec 'cypress/e2e/tc01-registerUser.cy.js' --browser chrome",
     "tc2": "npx cypress run --spec 'cypress/e2e/tc02-loginCorrect.cy.js' --browser chrome",
     "tc3": "npx cypress run --spec 'cypress/e2e/tc03-loginIncorrect.cy.js' --browser chrome",

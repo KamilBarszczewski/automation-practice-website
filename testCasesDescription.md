@@ -1,6 +1,7 @@
 # TEST CASES
 
 ## Test Case 1: Register User
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -21,6 +22,7 @@
 18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
 
 ## Test Case 2: Login User with correct email and password
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -33,6 +35,7 @@
 10. Verify that 'ACCOUNT DELETED!' is visible
 
 ## Test Case 3: Login User with incorrect email and password
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -43,6 +46,7 @@
 8. Verify error 'Your email or password is incorrect!' is visible
 
 ## Test Case 4: Logout User
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -55,6 +59,7 @@
 10. Verify that user is navigated to login page
 
 ## Test Case 5: Register User with existing email
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -65,6 +70,7 @@
 8. Verify error 'Email Address already exist!' is visible
 
 ## Test Case 6: Contact Us Form
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -78,6 +84,7 @@
 11. Click 'Home' button and verify that landed to home page successfully
 
 ## Test Case 7: Verify Test Cases Page
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -85,6 +92,7 @@
 5. Verify user is navigated to test cases page successfully
 
 ## Test Case 8: Verify All Products and product detail page
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -96,6 +104,7 @@
 9. Verify that detail detail is visible: product name, category, price, availability, condition, brand
 
 ## Test Case 9: Search Product
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -106,6 +115,7 @@
 8. Verify all the products related to search are visible
 
 ## Test Case 10: Verify Subscription in home page
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -115,6 +125,7 @@
 7. Verify success message 'You have been successfully subscribed!' is visible
 
 ## Test Case 11: Verify Subscription in Cart page
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -125,6 +136,7 @@
 8. Verify success message 'You have been successfully subscribed!' is visible
 
 ## Test Case 12: Add Products in Cart
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -137,6 +149,7 @@
 10. Verify their prices, quantity and total price
 
 ## Test Case 13: Verify Product quantity in Cart
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -148,6 +161,7 @@
 9. Verify that product is displayed in cart page with exact quantity
 
 ## Test Case 14: Place Order: Register while Checkout
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -170,6 +184,7 @@
 20. Verify 'ACCOUNT DELETED!' and click 'Continue' button
 
 ## Test Case 15: Place Order: Register before Checkout
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -190,6 +205,7 @@
 18. Verify 'ACCOUNT DELETED!' and click 'Continue' button
 
 ## Test Case 16: Place Order: Login before Checkout
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -209,6 +225,7 @@
 17. Verify 'ACCOUNT DELETED!' and click 'Continue' button
 
 ## Test Case 17: Remove Products From Cart
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that home page is visible successfully
@@ -219,6 +236,7 @@
 8. Verify that product is removed from the cart
 
 ## Test Case 18: View Category Products
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Verify that categories are visible on left side bar
@@ -229,6 +247,7 @@
 8. Verify that user is navigated to that category page
 
 ## Test Case 19: View & Cart Brand Products
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Click on 'Products' button
@@ -239,6 +258,7 @@
 8. Verify that user is navigated to that brand page and can see products
 
 ## Test Case 20: Search Products and Verify Cart After Login
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Click on 'Products' button
@@ -253,6 +273,7 @@
 12. Verify that those products are visible in cart after login as well
 
 ## Test Case 21: Add review on product
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Click on 'Products' button
@@ -264,6 +285,7 @@
 9. Verify success message 'Thank you for your review.'
 
 ## Test Case 22: Add to cart from Recommended items
+
 1. Launch browser
 2. Navigate to url 'http://automationexercise.com'
 3. Scroll to bottom of page
@@ -272,5 +294,4 @@
 6. Click on 'View Cart' button
 7. Verify that product is displayed in cart page
 
-
-
+gbsrdgr

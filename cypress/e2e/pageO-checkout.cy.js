@@ -165,6 +165,8 @@ describe("interaction with checkout", () => {
     hub.checkout.verifyInvoiceAddress();
     hub.checkout.reviewYourOrder(3);
     hub.checkout.reviewYourOrder(4);
+    hub.checkout.reviewTotalPrice();
+
     hub.checkout.placeOrder("test message");
     hub.payment.confirmPayment(
       "Testeusz Testeuszewicz",
