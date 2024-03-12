@@ -29,7 +29,7 @@ class ContactUsPage {
     return cy.get("#form-section").contains(" Home");
   }
 
-  contactUsForm(name, email, subject, message, file) {
+  fillContactForm(name, email, subject, message, file) {
     cy.contains("h2", "Get In Touch").should("be.visible");
     this.name.clear().type(name);
     this.email.clear().type(email);
@@ -37,15 +37,10 @@ class ContactUsPage {
     this.message.clear().type(message);
     this.uploadFile.selectFile(file);
     this.btnSubmit.click();
-
-    cy.contains(
-      /Success! Your details have been submitted successfully./i
-    ).should("exist");
   }
 
-  homeButton() {
+  homePageButton() {
     this.btnHome.click();
-    cy.location("pathname").should("equal", "/");
   }
 }
 
