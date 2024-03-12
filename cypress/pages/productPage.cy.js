@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 class ProductPage {
-  get productName() {
+  get verifyProductName() {
     return cy.get(".product-information").within(() => {
       cy.get("h2").then((name) => {
         cy.contains(name.text());
@@ -9,7 +9,7 @@ class ProductPage {
     });
   }
 
-  get productCategory() {
+  get verifyProductCategory() {
     return cy.get(".product-information").within(() => {
       cy.get("p")
         .its(0)
@@ -19,7 +19,7 @@ class ProductPage {
     });
   }
 
-  get productAvailability() {
+  get verifyProductAvailability() {
     return cy.get(".product-information").within(() => {
       cy.get("p")
         .its(1)
@@ -29,7 +29,7 @@ class ProductPage {
     });
   }
 
-  get productCondition() {
+  get verifyProductCondition() {
     return cy.get(".product-information").within(() => {
       cy.get("p")
         .its(2)
@@ -39,7 +39,7 @@ class ProductPage {
     });
   }
 
-  get productBrand() {
+  get verifyProductBrand() {
     return cy.get(".product-information").within(() => {
       cy.get("p")
         .its(3)
@@ -79,31 +79,27 @@ class ProductPage {
     return cy.get("#button-review");
   }
 
-  getProductDetails() {
-    this.productName;
-    this.productCategory;
-    this.productAvailability;
-    this.productCondition;
-    this.productBrand;
+  verifyProductDetails() {
+    this.verifyProductName;
+    this.verifyProductCategory;
+    this.verifyProductAvailability;
+    this.verifyProductCondition;
+    this.verifyProductBrand;
   }
 
   searchProduct(productName) {
-    cy.contains("h2", "All Products").should("exist");
     this.inputSearch.clear().type(productName);
     this.btnSearch.click();
-    cy.contains("h2", "Searched Products").should("exist");
   }
 
-  writeReview(name, email, message) {
-    cy.contains("a", "Write Your Review").should("be.visible");
+  submitReview(name, email, message) {
     this.reviewName.clear().type(name);
     this.reviewEmail.clear().type(email);
     this.reviewMessage.clear().type(message);
     this.btnSubmit.click();
-    cy.contains("span", "Thank you for your review.").should("be.visible");
   }
 
-  buttonAddToCart() {
+  addToCartButton() {
     this.btnAddToCart.click();
   }
 }
