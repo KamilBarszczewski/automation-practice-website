@@ -1,14 +1,6 @@
 /// <reference types="cypress" />
 
 class CartPage {
-  get inputSubscribe() {
-    return cy.get("#susbscribe_email");
-  }
-
-  get btnSubscribe() {
-    return cy.get("#subscribe");
-  }
-
   get productPrice() {
     return cy.get('td[class="cart_price"] > p');
   }
@@ -21,21 +13,17 @@ class CartPage {
     return cy.get('p[class="cart_total_price"]');
   }
 
-  get registerLogin() {
-    return cy.get('a[href="/login"]').contains("Register / Login");
-  }
-
   get btnCheckout() {
     return cy.contains(".check_out", "Proceed To Checkout");
   }
 
-  getProductName(productId) {
+  verifyProductNameById(productId) {
     cy.get(`[href="/product_details/${productId}"]`).then((name) => {
       cy.contains(name.text()).should("exist");
     });
   }
 
-  getProductPrice(productId) {
+  verifyProductPriceById(productId) {
     cy.get(`#product-${productId}`).within(() => {
       this.productPrice.then((price) => {
         cy.contains(price.text()).should("exist");
@@ -43,7 +31,7 @@ class CartPage {
     });
   }
 
-  getProductQuantity(productId) {
+  verifyProductQuantity(productId) {
     cy.get(`#product-${productId}`).within(() => {
       this.productQuantity.then((quantity) => {
         cy.contains(quantity.text()).should("exist");
@@ -51,7 +39,7 @@ class CartPage {
     });
   }
 
-  getTotalPrice(productId) {
+  verifyTotalPrice(productId) {
     cy.get(`#product-${productId}`).within(() => {
       this.totalPrice.then((total) => {
         cy.contains(total.text()).should("exist");
@@ -59,22 +47,11 @@ class CartPage {
     });
   }
 
-  subscribe(email) {
-    cy.contains(/Subscription/i).should("exist");
-    this.inputSubscribe.scrollIntoView().clear().type(email);
-    this.btnSubscribe.click();
-    cy.get("#success-subscribe").should("be.visible");
-  }
-
   removeProduct(productNumber) {
     cy.get(`a[data-product-id=${productNumber}]`).click();
   }
 
-  navRegisterLogin() {
-    this.registerLogin.click();
-  }
-
-  checkout() {
+  proceedToCheckoutButton() {
     cy.contains("Shopping Cart").should("exist");
     this.btnCheckout.click();
   }
