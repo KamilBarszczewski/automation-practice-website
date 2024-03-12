@@ -294,4 +294,65 @@
 6. Click on 'View Cart' button
 7. Verify that product is displayed in cart page
 
-gbsrdgr
+## Test Case 23: Verify address details in checkout page
+
+1. Launch browser
+2. Navigate to url 'http://automationexercise.com'
+3. Verify that home page is visible successfully
+4. Click 'Signup / Login' button
+5. Fill all details in Signup and create account
+6. Verify 'ACCOUNT CREATED!' and click 'Continue' button
+7. Verify ' Logged in as username' at top
+8. Add products to cart
+9. Click 'Cart' button
+10. Verify that cart page is displayed
+11. Click Proceed To Checkout
+12. Verify that the delivery address is same address filled at the time registration of account
+13. Verify that the billing address is same address filled at the time registration of account
+14. Click 'Delete Account' button
+15. Verify 'ACCOUNT DELETED!' and click 'Continue' button
+
+## Test Case 24: Download Invoice after purchase order
+
+1. Launch browser
+2. Navigate to url 'http://automationexercise.com'
+3. Verify that home page is visible successfully
+4. Add products to cart
+5. Click 'Cart' button
+6. Verify that cart page is displayed
+7. Click Proceed To Checkout
+8. Click 'Register / Login' button
+9. Fill all details in Signup and create account
+10. Verify 'ACCOUNT CREATED!' and click 'Continue' button
+11. Verify ' Logged in as username' at top
+    12.Click 'Cart' button
+12. Click 'Proceed To Checkout' button
+13. Verify Address Details and Review Your Order
+14. Enter description in comment text area and click 'Place Order'
+15. Enter payment details: Name on Card, Card Number, CVC, Expiration date
+16. Click 'Pay and Confirm Order' button
+17. Verify success message 'Your order has been placed successfully!'
+18. Click 'Download Invoice' button and verify invoice is downloaded successfully.
+19. Click 'Continue' button
+20. Click 'Delete Account' button
+21. Verify 'ACCOUNT DELETED!' and click 'Continue' button
+
+## Test Case 25: Verify Scroll Up using 'Arrow' button and Scroll Down functionality
+
+1. Launch browser
+2. Navigate to url 'http://automationexercise.com'
+3. Verify that home page is visible successfully
+4. Scroll down page to bottom
+5. Verify 'SUBSCRIPTION' is visible
+6. Click on arrow at bottom right side to move upward
+7. Verify that page is scrolled up and 'Full-Fledged practice website for Automation Engineers' text is visible on screen
+
+## Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functionality
+
+1. Launch browser
+2. Navigate to url 'http://automationexercise.com'
+3. Verify that home page is visible successfully
+4. Scroll down page to bottom
+5. Verify 'SUBSCRIPTION' is visible
+6. Scroll up page to top
+7. Verify that page is scrolled up and 'Full-Fledged practice website for Automation Engineers' text is visible on screen
