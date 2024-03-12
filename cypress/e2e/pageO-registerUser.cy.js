@@ -3,7 +3,7 @@ import MenuComponent from "../component/menuComponent";
 import LoginPage from "../pages/loginPage.cy";
 
 const menu = new MenuComponent();
-const login = new LoginPage();
+const loginPage = new LoginPage();
 
 describe("register user", () => {
   before("go to landing page", () => {
@@ -12,9 +12,12 @@ describe("register user", () => {
   });
 
   it("successfully register user", () => {
-    menu.signupLogin();
-    login.signupUser("Tescik", "tescik@test.ts");
-    login.signup.createUser(
+    menu.openLoginTab();
+    cy.contains("h2", "New User Signup!").should("be.visible");
+    loginPage.signupUser("Tescik", "tescik@test.ts");
+    cy.contains("b", "Enter Account Information").should("exist");
+
+    loginPage.signupPage.createUser(
       "Tescik",
       "testowy@",
       "30",
@@ -34,7 +37,7 @@ describe("register user", () => {
   });
 
   after(() => {
-    cy.pause();
-    menu.deleteUser();
+    //cy.pause();
+    menu.deleteUserTab();
   });
 });
