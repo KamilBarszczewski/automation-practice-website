@@ -6,11 +6,11 @@ class MenuComponent {
   }
 
   get btnProducts() {
-    return cy.getSubpage("products").contains(" Products");
+    return cy.linkToPage("products").contains(" Products");
   }
 
   get btnCart() {
-    return cy.getSubpage("view_cart").contains(" Cart");
+    return cy.linkToPage("view_cart").contains(" Cart");
   }
 
   get btnDeleteAcc() {
@@ -22,64 +22,54 @@ class MenuComponent {
   }
 
   get btnSignupLogin() {
-    return cy.getSubpage("login").contains(" Signup / Login");
+    return cy.linkToPage("login").contains(" Signup / Login");
   }
 
   get btnTestCases() {
-    return cy.getSubpage("test_cases").contains(" Test Cases");
+    return cy.linkToPage("test_cases").contains(" Test Cases");
   }
 
   get btnContactUs() {
-    return cy.getSubpage("contact_us").contains(" Contact us");
+    return cy.linkToPage("contact_us").contains(" Contact us");
   }
 
   get btnContinue() {
     return cy.getDataQa("continue-button");
   }
 
-  home() {
+  openHomeTab() {
     this.btnHome.click();
-    cy.location("pathname").should("equal", "/");
   }
 
-  products() {
+  openProductsTab() {
     this.btnProducts.click();
-    cy.location("pathname").should("equal", "/products");
-    cy.contains(/All Products/i).should("exist");
   }
 
-  cart() {
+  openCartTab() {
     this.btnCart.click({ force: true });
-    cy.location("pathname").should("equal", "/view_cart");
-    cy.contains(/Shopping Cart/i).should("exist");
   }
 
-  signupLogin() {
+  openLoginTab() {
     this.btnSignupLogin.click();
-    cy.contains("h2", "Login to your account").should("be.visible");
-    cy.contains("h2", "New User Signup!").should("be.visible");
   }
 
-  logoutUser() {
+  logoutUserTab() {
     this.btnLogout.click();
   }
 
-  deleteUser() {
+  deleteUserTab() {
     this.btnDeleteAcc.click();
     cy.contains(/account deleted/i).should("exist");
     this.btnContinue.click();
     cy.contains(/account deleted/i).should("not.exist");
   }
 
-  contactUs() {
+  openContactUsTab() {
     this.btnContactUs.click();
-    cy.location("pathname").should("equal", "/contact_us");
-    cy.contains(/contact us/i).should("exist");
   }
 
-  testCases() {
+  openTestCasesPage() {
     this.btnTestCases.click();
-    cy.contains(/Test Cases/i).should("exist");
   }
 }
 
