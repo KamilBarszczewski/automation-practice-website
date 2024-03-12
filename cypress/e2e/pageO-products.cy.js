@@ -1,19 +1,19 @@
 /// <reference types="cypress" />
 import MenuComponent from "../component/menuComponent";
 import LoginPage from "../pages/loginPage.cy";
-import SubpagesHub from "../component/subpagesHub";
+import HubPage from "../pages/hubPage.cy";
 
 const menu = new MenuComponent();
-const login = new LoginPage();
-const hub = new SubpagesHub();
+const loginPage = new LoginPage();
+const hub = new HubPage();
 
 describe("interaction with products", () => {
   before("Registering user", () => {
     cy.visit("/");
     cy.location("pathname").should("equal", "/");
-    menu.signupLogin();
-    login.signupUser("Tescik", "tescik@test.ts");
-    login.signup.createUser(
+    menu.openLoginTab();
+    loginPage.signupUser("Tescik", "tescik@test.ts");
+    loginPage.signupPage.createUser(
       "Tescik",
       "testowy@",
       "30",
@@ -31,7 +31,7 @@ describe("interaction with products", () => {
       "0021455535299"
     );
 
-    menu.logoutUser();
+    menu.logoutUserTab();
     cy.location("pathname").should("include", "/login");
   });
 
@@ -41,86 +41,101 @@ describe("interaction with products", () => {
   });
 
   it("TC 9: veryfy Search on Products page", () => {
-    menu.products();
-    hub.products.searchProduct("dress");
+    menu.openProductsTab();
+    cy.contains("h2", "All Products").should("exist");
+    hub.productsPage.searchProduct("dress");
+    cy.contains("h2", "Searched Products").should("exist");
   });
 
   it("TC 12: add products to cart", () => {
-    menu.products();
-    cy.addToCart(1);
-    hub.home.continueShopping();
-    cy.addToCart(2);
-    hub.home.viewCart();
+    menu.openProductsTab();
+    cy.addProductToCartById(1);
+    hub.continueShoppingButton();
+    cy.addProductToCartById(2);
+    hub.viewCartLink();
 
-    hub.cart.getProductPrice(1);
-    hub.cart.getProductQuantity(1);
-    hub.cart.getTotalPrice(1);
+    hub.cartPage.verifyProductNameById(1);
+    hub.cartPage.verifyProductPriceById(1);
+    hub.cartPage.verifyProductQuantity(1);
+    hub.cartPage.verifyTotalPrice(1);
 
-    hub.cart.getProductPrice(2);
-    hub.cart.getProductQuantity(2);
-    hub.cart.getTotalPrice(2);
+    hub.cartPage.verifyProductNameById(2);
+    hub.cartPage.verifyProductPriceById(2);
+    hub.cartPage.verifyProductQuantity(2);
+    hub.cartPage.verifyTotalPrice(2);
   });
 
   it("TC 13: veryfying product quantities", () => {
-    cy.getProduct(3);
+    cy.goToProductDetails(3);
     cy.location("pathname").should("equal", "/product_details/3");
     cy.get("#quantity").clear().type("4");
-    hub.products.buttonAddToCart();
-    hub.home.viewCart();
-    hub.cart.getProductQuantity(3);
+    hub.productsPage.addToCartButton();
+    hub.viewCartLink();
+    hub.cartPage.verifyProductNameById(3);
+    hub.cartPage.verifyProductQuantity(3);
   });
 
   it("TC 17: remove products", () => {
-    cy.addToCart(3);
-    hub.home.continueShopping();
-    cy.addToCart(6);
-    hub.home.viewCart();
-    hub.cart.removeProduct(3);
-    hub.cart.removeProduct(6);
-    cy.contains("b", "Cart is empty!");
+    cy.addProductToCartById(3);
+    hub.continueShoppingButton();
+    cy.addProductToCartById(6);
+    hub.viewCartLink();
+    hub.cartPage.removeProduct(3);
+    hub.cartPage.removeProduct(6);
+    cy.contains("b", "Cart is empty!").should("exist");
   });
 
   it("TC 18: exploring products' category", () => {
-    hub.home.categoryWomen();
-    hub.home.subcategoryDress();
-    hub.home.categoryMen();
-    hub.home.subcategoryTshirts();
+    hub.clickCategoryWomen();
+    hub.clickSubcategoryDress();
+    // Która asercja jest bardziej prawilna, exist czy be.visible ??
+    cy.contains("h2", "Women - Dress Products").should("exist");
+
+    hub.clickCategoryMen();
+    hub.clickSubcategoryTshirts();
+    cy.contains("h2", "Men - Tshirts Products").should("be.visible");
   });
 
   it("TC 19: exploring products' brand", () => {
-    menu.products();
+    menu.openProductsTab();
     cy.contains("h2", "Brands").should("exist");
-    hub.home.brandPolo();
-    hub.home.brandHM();
+    hub.clickBrandPolo();
+    cy.contains(/Brand - Polo Products/i).should("exist");
+    hub.clickBrandHM();
+    cy.contains(/Brand - H&M Products/i).should("exist");
   });
 
   it("TC 20: searchproducts and verify after login", () => {
-    menu.products();
-    hub.products.searchProduct("jeans");
-    cy.addToCart(33);
-    hub.home.continueShopping();
-    cy.addToCart(35);
-    hub.home.continueShopping();
-    cy.addToCart(37);
-    hub.home.viewCart();
+    menu.openProductsTab();
+    hub.productsPage.searchProduct("jeans");
+    cy.contains(/Searched Products/i).should("exist");
+    cy.addProductToCartById(33);
+    hub.continueShoppingButton();
+    cy.addProductToCartById(35);
+    hub.continueShoppingButton();
+    cy.addProductToCartById(37);
+    hub.viewCartLink();
 
-    hub.cart.getProductName(33);
-    hub.cart.getProductName(35);
-    hub.cart.getProductName(37);
+    hub.cartPage.verifyProductNameById(33);
+    hub.cartPage.verifyProductNameById(35);
+    hub.cartPage.verifyProductNameById(37);
 
-    menu.signupLogin();
-    login.loginUser("tescik@test.ts", "testowy@");
+    menu.openLoginTab();
+    loginPage.loginUser("tescik@test.ts", "testowy@");
 
-    menu.cart();
-    hub.cart.getProductName(33);
-    hub.cart.getProductName(35);
-    hub.cart.getProductName(37);
+    menu.openCartTab();
+    hub.cartPage.verifyProductNameById(33);
+    hub.cartPage.verifyProductNameById(35);
+    hub.cartPage.verifyProductNameById(37);
   });
 
   it("TC 21: add review", () => {
-    menu.products();
-    cy.getProduct(3);
-    hub.products.writeReview("Tescik", "tescik@test.ts", "test message");
+    menu.openProductsTab();
+    cy.goToProductDetails(3);
+
+    cy.contains("a", "Write Your Review").should("be.visible");
+    hub.productsPage.submitReview("Tescik", "tescik@test.ts", "test message");
+    cy.contains("span", "Thank you for your review.").should("be.visible");
   });
 
   it("TC 22: recommended items", () => {
@@ -130,13 +145,15 @@ describe("interaction with products", () => {
       cy.get('[data-product-id="3"]').click();
     });
 
-    hub.home.viewCart();
-    hub.cart.getProductName(3);
+    hub.viewCartLink();
+    hub.cartPage.verifyProductNameById(3);
   });
 
   after("Deleting user", () => {
-    menu.signupLogin();
-    login.loginUser("tescik@test.ts", "testowy@");
-    menu.deleteUser();
+    menu.openLoginTab();
+    loginPage.loginUser("tescik@test.ts", "testowy@");
+
+    cy.contains("a", " Logged in as Tescik").should("exist");
+    menu.deleteUserTab();
   });
 });
