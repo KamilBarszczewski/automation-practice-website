@@ -33,16 +33,13 @@ class PaymentPage {
     return cy.contains("Download Invoice").should("exist");
   }
 
-  confirmPayment(cardName, cardNumber, cardCvc, expMonth, expYear) {
+  fillPaymentForm(cardName, cardNumber, cardCvc, expMonth, expYear) {
     this.inputCardName.clear().type(cardName);
     this.inputCardNumber.clear().type(cardNumber);
     this.inputCvcNumber.clear().type(cardCvc);
     this.inputExpiryMonth.clear().type(expMonth);
     this.inputExpiryYear.clear().type(expYear);
     this.btnPay.click();
-    cy.contains("p", "Congratulations! Your order has been confirmed!").should(
-      "be.visible"
-    );
   }
 
   downloadInvoiceButton() {
