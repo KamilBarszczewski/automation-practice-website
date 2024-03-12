@@ -9,7 +9,7 @@ class CheckoutPage {
     return cy.get('a[href="/payment"]').contains("Place Order");
   }
 
-  get prodName() {
+  get verifyProductName() {
     return cy.get(".cart_description").within(() => {
       cy.get("h4").then((name) => {
         cy.contains(name.text()).should("exist");
@@ -17,15 +17,15 @@ class CheckoutPage {
     });
   }
 
-  get prodDesc() {
+  get verifyProdDescription() {
     return cy.get(".cart_description").within(() => {
-      cy.get("p").then((desc) => {
-        cy.contains(desc.text()).should("exist");
+      cy.get("p").then((description) => {
+        cy.contains(description.text()).should("exist");
       });
     });
   }
 
-  get prodPrice() {
+  get verifyProductPrice() {
     return cy.get(".cart_price").within(() => {
       cy.get("p").then((price) => {
         cy.contains(price.text()).should("exist");
@@ -33,7 +33,7 @@ class CheckoutPage {
     });
   }
 
-  get prodQuantity() {
+  get verifyProductQuantity() {
     return cy.get(".cart_quantity").within(() => {
       cy.get("button").then((quantity) => {
         cy.contains(quantity.text()).should("exist");
@@ -41,7 +41,7 @@ class CheckoutPage {
     });
   }
 
-  get prodTotal() {
+  get verifyProductTotal() {
     return cy.get(".cart_total").within(() => {
       cy.get("p").then((total) => {
         cy.contains(total.text()).should("exist");
@@ -49,35 +49,37 @@ class CheckoutPage {
     });
   }
 
-  get totalPrice() {
+  get verifyTotalPrice() {
     return cy.get("tbody").within(() => {
       cy.get("tr")
         .last()
         .within(() => {
           cy.get("td")
             .last()
-            .then((totalPrice) => {
-              cy.contains(totalPrice.text()).should("exist");
+            .within(() => {
+              cy.get(".cart_total_price").then((totalPrice) => {
+                cy.contains(totalPrice.text()).should("exist");
+              });
             });
         });
     });
   }
 
-  reviewYourOrder(productId) {
+  verifyYourOrder(productId) {
     cy.get(`tr[id="product-${productId}"]`).within(() => {
-      this.prodName;
-      this.prodDesc;
-      this.prodPrice;
-      this.prodQuantity;
-      this.prodTotal;
+      this.verifyProductName;
+      this.verifyProdDescription;
+      this.verifyProductPrice;
+      this.verifyProductQuantity;
+      this.verifyProductTotal;
     });
   }
 
-  reviewTotalPrice() {
-    this.totalPrice;
+  verifyTotalPrice() {
+    this.verifyTotalPrice;
   }
 
-  placeOrder(message) {
+  fillPlaceOrderForm(message) {
     cy.getDataQa("checkout-info").should("exist");
     cy.get("#cart_info").should("be.visible");
     this.inputMessage.clear().type(message);
