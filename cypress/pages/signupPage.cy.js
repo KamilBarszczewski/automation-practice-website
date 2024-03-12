@@ -102,7 +102,6 @@ class SignupPage {
     zipcode,
     mobile
   ) {
-    cy.contains("b", "Enter Account Information").should("exist");
     this.mrTitle.check();
     this.name.clear().type(name);
     this.password.clear().type(password);
@@ -121,8 +120,10 @@ class SignupPage {
     this.city.clear().type(city);
     this.zipCode.clear().type(zipcode);
     this.mobileNumber.clear().type(mobile);
+
     this.btnCreateAcc.click();
 
+    /* Jeśli przeniosę linie 126, 127 do pliku pageO-registerUser.cy.js po metodzie loginPage.signupPage.createUser() to stracę możliwość użycia superstringa w obecnej linii 128. Pytanie czy warto tracić / czy asercję bezwzględnie trzeba przenieść ? :) */
     cy.getDataQa("account-created").should("be.visible");
     cy.getDataQa("continue-button").click();
     cy.contains("a", ` Logged in as ${name}`).should("exist");
