@@ -1,11 +1,12 @@
 /// <reference types="cypress" />
+
 import MenuComponent from "../component/menuComponent";
-import SubpagesHub from "../component/subpagesHub";
+import HubPage from "../pages/hubPage.cy";
 import LoginPage from "../pages/loginPage.cy";
 
 const menu = new MenuComponent();
-const hub = new SubpagesHub();
-const login = new LoginPage();
+const hub = new HubPage();
+const loginPage = new LoginPage();
 
 describe("interaction with checkout", () => {
   beforeEach(() => {
@@ -14,12 +15,13 @@ describe("interaction with checkout", () => {
   });
 
   it("TC 14: register user after adding product to cart", () => {
-    cy.addToCart(3);
-    hub.home.viewCart();
-    hub.cart.checkout();
-    cy.getSubpage("login").contains("Register / Login").click();
-    login.signupUser("Tescik", "tescik@test.ts");
-    login.signup.createUser(
+    cy.addProductToCartById(3);
+    hub.viewCartLink();
+    cy.location("pathname").should("equal", "/view_cart");
+    hub.cartPage.proceedToCheckoutButton();
+    cy.linkToPage("login").contains("Register / Login").click();
+    loginPage.signupUser("Tescik", "tescik@test.ts");
+    loginPage.signupPage.createUser(
       "Tescik",
       "testowy@",
       "30",
@@ -37,10 +39,11 @@ describe("interaction with checkout", () => {
       "0021455535299"
     );
 
-    menu.cart();
-    hub.cart.checkout();
-    hub.checkout.placeOrder("test message");
-    hub.payment.confirmPayment(
+    menu.openCartTab();
+    cy.location("pathname").should("equal", "/view_cart");
+    hub.cartPage.proceedToCheckoutButton();
+    hub.checkoutPage.fillPlaceOrderForm("test message");
+    hub.paymentPage.fillPaymentForm(
       "Testeusz Testeuszewicz",
       "123456789",
       "123",
@@ -48,13 +51,16 @@ describe("interaction with checkout", () => {
       "2025"
     );
 
-    hub.payment.continueButton();
+    cy.contains("p", "Congratulations! Your order has been confirmed!").should(
+      "be.visible"
+    );
+    hub.paymentPage.continueButton();
   });
 
   it("TC 15: register user then make checkout", () => {
-    menu.signupLogin();
-    login.signupUser("Tescik", "tescik@test.ts");
-    login.signup.createUser(
+    menu.openLoginTab();
+    loginPage.signupUser("Tescik", "tescik@test.ts");
+    loginPage.signupPage.createUser(
       "Tescik",
       "testowy@",
       "30",
@@ -72,13 +78,14 @@ describe("interaction with checkout", () => {
       "0021455535299"
     );
 
-    cy.addToCart(5);
-    hub.home.continueShopping();
-    cy.addToCart(8);
-    hub.home.viewCart();
-    hub.cart.checkout();
-    hub.checkout.placeOrder("test message");
-    hub.payment.confirmPayment(
+    cy.addProductToCartById(5);
+    hub.continueShoppingButton();
+    cy.addProductToCartById(8);
+    hub.viewCartLink();
+    cy.location("pathname").should("equal", "/view_cart");
+    hub.cartPage.proceedToCheckoutButton();
+    hub.checkoutPage.fillPlaceOrderForm("test message");
+    hub.paymentPage.fillPaymentForm(
       "Testeusz Testeuszewicz",
       "123456789",
       "123",
@@ -86,13 +93,16 @@ describe("interaction with checkout", () => {
       "2025"
     );
 
-    hub.payment.continueButton();
+    cy.contains("p", "Congratulations! Your order has been confirmed!").should(
+      "be.visible"
+    );
+    hub.paymentPage.continueButton();
   });
 
   it("TC 16: login user then checkout", () => {
-    menu.signupLogin();
-    login.signupUser("Tescik", "tescik@test.ts");
-    login.signup.createUser(
+    menu.logoutUserTab();
+    loginPage.signupUser("Tescik", "tescik@test.ts");
+    loginPage.signupPage.createUser(
       "Tescik",
       "testowy@",
       "30",
@@ -110,18 +120,19 @@ describe("interaction with checkout", () => {
       "0021455535299"
     );
 
-    menu.logoutUser();
+    menu.logoutUserTab();
 
-    menu.signupLogin();
-    login.loginUser("tescik@test.ts", "testowy@");
+    menu.logoutUserTab();
+    loginPage.loginUser("tescik@test.ts", "testowy@");
 
-    cy.addToCart(3);
-    hub.home.continueShopping();
-    cy.addToCart(6);
-    hub.home.viewCart();
-    hub.cart.checkout();
-    hub.checkout.placeOrder("test message");
-    hub.payment.confirmPayment(
+    cy.addProductToCartById(3);
+    hub.continueShoppingButton();
+    cy.addProductToCartById(6);
+    hub.viewCartLink();
+    cy.location("pathname").should("equal", "/view_cart");
+    hub.cartPage.proceedToCheckoutButton();
+    hub.checkoutPage.fillPlaceOrderForm("test message");
+    hub.paymentPage.fillPaymentForm(
       "Testeusz Testeuszewicz",
       "123456789",
       "123",
@@ -129,19 +140,24 @@ describe("interaction with checkout", () => {
       "2025"
     );
 
-    hub.payment.continueButton();
+    cy.contains("p", "Congratulations! Your order has been confirmed!").should(
+      "be.visible"
+    );
+
+    hub.paymentPage.continueButton();
   });
 
-  it.only("TC 24: download invoice after purchase order", () => {
+  it("TC 24: download invoice after purchase order", () => {
     cy.task("deleteDownloads");
-    cy.addToCart(3);
-    hub.home.continueShopping();
-    cy.addToCart(4);
-    hub.home.viewCart();
-    hub.cart.checkout();
-    cy.getSubpage("login").contains("Register / Login").click();
-    login.signupUser("Tescik", "tescik@test.ts");
-    login.signup.createUser(
+
+    cy.addProductToCartById(3);
+    hub.continueShoppingButton();
+    cy.addProductToCartById(4);
+    hub.viewCartLink();
+    hub.cartPage.proceedToCheckoutButton();
+    cy.linkToPage("login").contains("Register / Login").click();
+    loginPage.signupUser("Tescik", "tescik@test.ts");
+    loginPage.signupPage.createUser(
       "Tescik",
       "testowy@",
       "30",
@@ -159,16 +175,17 @@ describe("interaction with checkout", () => {
       "0021455535299"
     );
 
-    menu.cart();
-    hub.cart.checkout();
-    hub.checkout.verifyDeliveryAddress();
-    hub.checkout.verifyInvoiceAddress();
-    hub.checkout.reviewYourOrder(3);
-    hub.checkout.reviewYourOrder(4);
-    hub.checkout.reviewTotalPrice();
+    menu.openCartTab();
+    hub.cartPage.proceedToCheckoutButton();
+    hub.checkoutPage.verifyDeliveryAddress();
+    hub.checkoutPage.verifyInvoiceAddress();
+    hub.checkoutPage.verifyYourOrder(3);
+    hub.checkoutPage.verifyYourOrder(4);
+    // nic mi nie daje
+    hub.checkoutPage.verifyTotalPrice();
 
-    hub.checkout.placeOrder("test message");
-    hub.payment.confirmPayment(
+    hub.checkoutPage.fillPlaceOrderForm("test message");
+    hub.paymentPage.fillPaymentForm(
       "Testeusz Testeuszewicz",
       "123456789",
       "123",
@@ -176,16 +193,17 @@ describe("interaction with checkout", () => {
       "2025"
     );
 
-    hub.payment.downloadInvoiceButton();
+    hub.paymentPage.downloadInvoiceButton();
     cy.readFile("cypress/downloads/invoice.txt").should(
       "equal",
       "Hi Testeusz Testeuszewicz, Your total purchase amount is 2500. Thank you"
     );
 
-    hub.payment.continueButton();
+    hub.paymentPage.continueButton();
   });
 
   afterEach("delete user", () => {
-    menu.deleteUser();
+    cy.contains("a", " Logged in as Tescik").should("exist");
+    menu.deleteUserTab();
   });
 });
