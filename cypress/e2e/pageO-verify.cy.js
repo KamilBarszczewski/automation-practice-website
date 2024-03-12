@@ -1,19 +1,20 @@
 /// <reference types="cypress" />
+
 import MenuComponent from "../component/menuComponent";
 import LoginPage from "../pages/loginPage.cy";
-import SubpagesHub from "../component/subpagesHub";
+import HubPage from "../pages/hubPage.cy";
 
 const menu = new MenuComponent();
-const login = new LoginPage();
-const hub = new SubpagesHub();
+const loginPage = new LoginPage();
+const hub = new HubPage();
 
 describe("verify pages", () => {
   before("register user", () => {
     cy.visit("/");
     cy.location("pathname").should("equal", "/");
-    menu.signupLogin();
-    login.signupUser("Tescik", "tescik@test.ts");
-    login.signup.createUser(
+    menu.openLoginTab();
+    loginPage.signupUser("Tescik", "tescik@test.ts");
+    loginPage.signupPage.createUser(
       "Tescik",
       "testowy@",
       "30",
@@ -38,36 +39,58 @@ describe("verify pages", () => {
   });
 
   it("TC 23: verify address details in checkout page", () => {
-    cy.addToCart(3);
-    hub.home.continueShopping();
-    cy.addToCart(1);
-    hub.home.viewCart();
+    cy.contains("a", " Logged in as Tescik").should("exist");
+    cy.addProductToCartById(3);
+    hub.continueShoppingButton();
+    cy.addProductToCartById(1);
+    hub.viewCartLink();
 
-    hub.cart.checkout();
-    hub.checkout.verifyDeliveryAddress();
-    hub.checkout.verifyInvoiceAddress();
+    hub.cartPage.proceedToCheckoutButton();
+    hub.checkoutPage.verifyDeliveryAddress();
+    hub.checkoutPage.verifyInvoiceAddress();
+  });
+
+  it("TC 6: fill form on Contact Us page", () => {
+    menu.openContactUsTab();
+    cy.contains(/get in touch/i).should("exist");
+    hub.contactPage.fillContactForm(
+      "Testeusz Testowy",
+      "tescik@test.ts",
+      "Temat testowy",
+      "Wiadomosc testowa",
+      "cypress/fixtures/faun.webp"
+    );
+    cy.contains(
+      /Success! Your details have been submitted successfully./i
+    ).should("exist");
+
+    hub.contactPage.homePageButton();
+    cy.location("pathname").should("equal", "/");
   });
 
   it("TC 7: verify Test Cases page", () => {
-    menu.testCases();
+    menu.openTestCasesPage();
     cy.location("pathname").should("equal", "/test_cases");
-    cy.contains(/Test Cases/i).should("exist");
   });
 
   it("TC 8: verify products page", () => {
-    menu.products();
-    cy.getProduct(1);
+    menu.openProductsTab();
+    cy.location("pathname").should("equal", "/products");
+    cy.contains(/All Products/i).should("exist");
+    cy.goToProductDetails(1);
     cy.location("pathname").should("equal", "/product_details/1");
-    hub.products.getProductDetails();
+    hub.productsPage.verifyProductDetails();
   });
 
   it("TC 10: verify Subscription in home page", () => {
-    hub.home.subscribe("tescik@test.ts");
+    hub.fillSubscribeForm("tescik@test.ts");
+    cy.get("#success-subscribe").should("be.visible");
   });
 
   it("TC 11: veryfy subscription in cart page", () => {
-    menu.cart();
-    hub.cart.subscribe("tescik@test.ts");
+    menu.openCartTab();
+    hub.fillSubscribeForm("tescik@test.ts");
+    cy.get("#success-subscribe").should("be.visible");
   });
 
   it("TC 25: verify scroll up using Arrow and scroll down functionality", () => {
@@ -88,8 +111,10 @@ describe("verify pages", () => {
   });
 
   after("delete user", () => {
-    menu.signupLogin();
-    login.loginUser("tescik@test.ts", "testowy@");
-    menu.deleteUser();
+    menu.openLoginTab();
+    loginPage.loginUser("tescik@test.ts", "testowy@");
+
+    cy.contains("a", " Logged in as Tescik").should("exist");
+    menu.deleteUserTab();
   });
 });
